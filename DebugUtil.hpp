@@ -65,9 +65,7 @@ std::list<HurryPeng::Vector3D> chargesToPointSet(const Container & charges)
 {
     std::list<HurryPeng::Vector3D> pointSet;
     for (const HurryPeng::FreeCharge & charge : charges)
-    {
         pointSet.push_back(charge.coord);
-    }
     return pointSet;
 }
 

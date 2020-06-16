@@ -129,9 +129,7 @@ public:
     long double cosineOfAngle(const Vector3D & rhs) const
     {
         if (this->norm() == 0.0 || rhs.norm() == 0.0)
-        {
             throw std::invalid_argument("Calculating angle with a zero Vector3D");
-        }
         return *this % rhs / this->norm() / rhs.norm();
     }
 
