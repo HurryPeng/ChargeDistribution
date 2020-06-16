@@ -17,7 +17,7 @@ namespace HurryPeng
 class Region
 {
 private:
-    const int radius = 8; // !!!!!!!!!!
+    const int radius = 8;
     std::map<Chunk::ChunkId, Chunk> chunks;
     std::vector<Conductor> conductors;
     ElectricField outerField;
@@ -37,10 +37,7 @@ public:
         for (Conductor & conductor : conductors)
         {
             conductor.precalcApproxNormalVector(radius);
-            conductor.spreadCharges(true);///////////????
-
-            if (conductor.boundCharges.empty()) std::cerr << "BoundCharges empy!\n"; //
-            else std::cerr << "correct\n"; //
+            conductor.spreadCharges(true);
 
             for (const FreeCharge & charge : conductor.boundCharges)
                 chunks.at(Chunk::ChunkId(charge.coord)).assignCharge(&charge);
@@ -48,26 +45,44 @@ public:
 
     }
 
-    void proceed()
+    struct Stat
     {
-        tick++;
-        for (auto & pr : chunks) pr.second.updateStat();
+        int tick = 0;
+        int count = 0; // Number of free charges
+        long double dxEstm = 0.0; // Average dx before elimination
+        long double dxElim = 0.0; // Average dx after elimination
+        long double vel = 0.0; // Average velocity
+        long double acc = 0.0; // Average acceleration
+        long double elimRate = 0.0; // Rate of eliminated charges
+        long double bruteElimRate = 0.0; // Rate of cut-half-eliminated charges
+        long double stayRate = 0.0; // Rate of charges that stayed
+        long double superFoceRate = 0.0; // Rate of charges with excessive acceleration
 
-        long double delta0 = 0, delta = 0;//
-        long double avVel = 0, avAcc = 0;//
-        //long double avAccApprox = 0;
-        int eliminated = 0;//
-        int superForce = 0;
-        int brute = 0;
-        int stayed = 0;
-        int count = 0;//
+        operator std::string() const
+        {
+            std::stringstream ss;
+            ss << "Tick " << tick << " statistics: " << '\n';
+            ss << "dxEstm, dxElim = " << dxEstm << ", " << dxElim << '\n';
+            ss << "vel, acc = " << vel << ", " << acc << '\n';
+            ss << "elim, brute = " << elimRate << ", " << bruteElimRate << '\n';
+            ss << "stay, superforce = " << stayRate << ", " << superFoceRate << '\n';
+            return ss.str();
+        }
+    };
+
+    Stat proceed()
+    {
+        Stat stat;
+
+        tick++;
+        stat.tick = tick;
+        for (auto & pr : chunks) pr.second.updateStat();
 
         for (Conductor & conductor : conductors)
         {
             for (FreeCharge & charge : conductor.boundCharges)
             {
-                count++;//
-                //Vector3D accApprox = charge.accel(outerField);
+                stat.count++;
 
                 Vector3D acc = charge.accel(outerField);
                 Chunk & curChunk = chunks.at(Chunk::ChunkId(charge.coord));
@@ -76,39 +91,37 @@ public:
                     const Chunk & anyChunk = pr.second;
                     if (anyChunk.isSurrounding(curChunk))
                         acc += charge.accel(anyChunk.getPreciseField());
-                    else acc += charge.accel(anyChunk.getApproxField());////////////////////
-                    //if (anyChunk.isSurrounding(curChunk))//
-                    //    accApprox += charge.accel(anyChunk.getPreciseField());//
-                    //else accApprox += charge.accel(anyChunk.getApproxField());//
+                    else acc += charge.accel(anyChunk.getApproxField());
                 }
 
                 // Max vel / acc limits
-                if (charge.vel.norm() >= 0.01 / dt) // //
+                if (charge.vel.norm() >= 0.01 / dt)
                     charge.vel = charge.vel.unit() * 0.01 / dt;
-                if (acc.norm() >= 0.01 / dt / dt * 2) // //
+                if (acc.norm() >= 0.01 / dt / dt * 2)
                     acc = acc.unit() * 0.01 / dt / dt * 2;
 
                 Vector3D dx = charge.vel * dt + acc * dt * dt / 2;
                 if (dx.norm() >= 0.01) dx = dx.unit() * 0.01; // //
 
-                if (acc.norm() >= 10000) superForce++, avAcc -= acc.norm(); //std::cerr << acc << dx << '\n';
-                avAcc += acc.norm();
+                if (acc.norm() >= 10000) stat.superFoceRate++, stat.acc -= acc.norm(); //std::cerr << acc << dx << '\n';
+                stat.acc += acc.norm();
                 charge.vel += acc * dt;
 
-                //Vector3D nextCoord = charge.coord + dx;
-                delta0 += dx.norm();//
+                stat.dxEstm += dx.norm();//
 
                 std::vector<int> accumExceedIds = conductor.idOfSurfacesExceededBy(charge.coord + dx);
-                //std::cerr << "Exceeds: " << accumExceedIds.size() << '\n';
                 if (accumExceedIds.size() == 1) // Exceeding a surface
                 {
-                    eliminated++; //
+                    stat.elimRate++; //
                     const int & exceedId0 = accumExceedIds[0];
                     const Vector3D & norm0 = conductor.approxNormalVector[curChunk.getId()][exceedId0];
 
-                    dx -= 1.25 * dx.projectOnto(norm0); // Erase perpendicular part from dx
-                    // And only dx "bounces"! 
+                    Vector3D dxPerpendicular = dx.projectOnto(norm0);
+                    dx -= 1.0 * dxPerpendicular; // Erase perpendicular part from dx
                     charge.vel -= charge.vel.projectOnto(norm0);
+
+                    if (!conductor.surfaces[accumExceedIds[0]](charge.coord + dx)) // Bounce
+                        dx -= 0.5 * dxPerpendicular;
 
                     // Update accumeExceedIds to evaluate whether further operation is needed
                     for (const int & id : conductor.idOfSurfacesExceededBy(charge.coord + dx))
@@ -117,8 +130,6 @@ public:
                 }
                 if (accumExceedIds.size() == 2) // Exceeding an edge
                 {
-                    //std::cerr << "Exceeding an edge\n";
-
                     const int & exceedId1 = accumExceedIds[0];
                     const int & exceedId2 = accumExceedIds[1];
                     const Vector3D & norm1 = conductor.approxNormalVector[curChunk.getId()][exceedId1];
@@ -131,59 +142,36 @@ public:
                 // If no way has proved effective up till now, then we can only go to brute
                 if (!conductor(charge.coord + dx))
                 {
-                    brute++; //
-
-                    // Prevent sticky superforce
-                    if (dx.norm() > 10) dx = dx.unit() * 10;
+                    stat.bruteElimRate++;
 
                     for (int i = 1; i <= 8 && !conductor(charge.coord + dx); i++)
                         dx /= 2, charge.vel /= 2;
                     
                     if (!conductor(charge.coord + dx)) dx = charge.vel = Vector3D::ZERO_VECTOR;
                 }
-                
-                //if (!conductor(charge.coord)) std::cerr << "???\n";
-                /*
 
-                if (!conductor(nextCoord))
-                {
-                    eliminated++;//
-                    charge.vel = Vector3D::ZERO_VECTOR; //////////////////////
-                    Vector3D & norm = conductor.approxNormalVector[curChunk.getId()];
-                    nextCoord -= dx.projectOnto(norm); // Erase perpendicular part
-                    for (int i = 1; i <= 4 && !conductor(nextCoord); i++)
-                        nextCoord = (nextCoord + charge.coord) / 2;
-                    if (!conductor(nextCoord)) nextCoord = charge.coord;
-                }
+                if (dx == Vector3D::ZERO_VECTOR) stat.stayRate++;
 
-                */
-
-                if (dx == Vector3D::ZERO_VECTOR) stayed++;//
-
-                avVel += charge.vel.norm();//
-                //avAccApprox += accApprox.norm();//
-                delta += dx.norm();//
+                stat.vel += charge.vel.norm();
+                stat.dxElim += dx.norm();
 
                 charge.coord += dx;
-                try
-                {
-                    chunks.at(Chunk::ChunkId(charge.coord));
-                }
-                catch (std::exception & e)
-                {
-                    std::cerr << dx << '\n' << charge.coord << '\n';
-                    std::abort();
-                }
                 Chunk & nextChunk = chunks.at(Chunk::ChunkId(charge.coord));
                 curChunk.removeCharge(&charge);
                 nextChunk.assignCharge(&charge);
             }
         }
-        std::cerr << "Av. delta = " << delta0 / count << ", " << delta / count << '\n';
-        std::cerr << "Av. vel, acc = " << avVel / count << ", " << avAcc / count << '\n';
-        //std::cerr << "Av. accApprox = " << avAccApprox / count << '\n';
-        std::cerr << "Eliminated, stayed = " << (double)eliminated / count  << ", " << (double)stayed / count << '\n';
-        std::cerr << "Superforce, brute = " << (double)superForce / count << ", " << (double)brute / count << '\n';
+
+        stat.dxElim /= stat.count;
+        stat.dxEstm /= stat.count;
+        stat.vel /= stat.count;
+        stat.acc /= stat.count;
+        stat.elimRate /= stat.count;
+        stat.bruteElimRate /= stat.count;
+        stat.stayRate /= stat.count;
+        stat.superFoceRate /= stat.count;
+
+        return stat;
     }
 
     int getTick() const { return tick; }
@@ -208,6 +196,12 @@ public:
     } 
 
 }; // class Region
+
+std::ostream & operator<<(std::ostream & lhs, const Region::Stat & rhs)
+{
+    lhs << std::string(rhs);
+    return lhs;
+}
 
 } // namespace HurryPeng
 

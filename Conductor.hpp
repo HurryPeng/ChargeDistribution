@@ -10,6 +10,8 @@
 #include <tuple>
 #include <float.h>
 #include <random>
+#include <numeric>
+#include <algorithm>
 
 namespace HurryPeng
 {
@@ -23,6 +25,7 @@ struct Conductor
         typedef std::function<bool(const Vector3D &)> ImplicitSurface;
 
         const static Domain DOMAIN_FULL;
+        const static Domain DOMAIN_CIRCLE;
 
         ParamSurface paramSurface;
         Domain domain; // Domain function within a unit square
@@ -106,10 +109,11 @@ struct Conductor
             };
             plate.domain = domain;
             plate.facingOut = facingOut;
-            plate.implicitSurface = [origin, vecU, vecV]
+            plate.implicitSurface = [origin, vecU, vecV, facingOut]
                 (const Vector3D & coord) -> bool
             {
-                return ((coord - origin) % (vecU * vecV) <= 0);
+                if (facingOut) return ((coord - origin) % (vecU * vecV) <= 0);
+                return ((coord - origin) % (vecU * vecV) >= 0);
             };
             return plate;
         }
@@ -204,6 +208,8 @@ struct Conductor
 
     std::list<std::pair<Vector3D, long double>> calcSurfaceField(int precision, long double distance) const
     {
+        std::vector<std::vector<long double>> sphereStat(precision);////////
+
         std::list<std::pair<Vector3D, long double>> fields;
         for (const Surface surface : surfaces)
         {
@@ -218,10 +224,23 @@ struct Conductor
                 {
                     Vector3D deltaX = extendedPoint - freeCharge.coord;
                     if (deltaX == Vector3D::ZERO_VECTOR) std::cerr << "?????\n";
-                    intensity += freeCharge.q() / deltaX.norm() / deltaX.norm() * deltaX.unit();
+                    intensity += freeCharge.q() * freeCharge.q() / deltaX.norm() / deltaX.norm() * deltaX.unit();
                 }
                 fields.emplace_back(extendedPoint, intensity.norm());////////////////////
+
+                sphereStat[int(round(precision * uv.second))].push_back(intensity.norm());/////////
             }
+
+            
+            for (int i = 0; i < precision; i++)//////////
+            {
+                std::vector<long double> & statV = sphereStat[i];
+                long double sum = std::accumulate(statV.begin(), statV.end(), 0.0);
+                sum /= statV.size();
+                std::cout << sum << ' ';
+            }
+            
+            std::cout << '\n';
         }
         return fields;
     }
@@ -287,9 +306,11 @@ struct Conductor
         return generateEllipse(centre, r, r, r, precalcPrecision, spreadPrecision);
     }
 
-    static Conductor generateCube(
+    static Conductor generateCube
+    (
         const Vector3D & centre = Vector3D::ZERO_VECTOR, const double & l = 0.01, 
-        int precalcPrecision = 128, int spreadPrecision = 64)
+        int precalcPrecision = 128, int spreadPrecision = 64
+    )
     {
         Conductor conductor;
         Vector3D lowVertex = centre - Vector3D({l / 2, l / 2, l / 2});
@@ -310,11 +331,53 @@ struct Conductor
 
         return conductor;
     }
+
+    static Conductor generateTimeglass
+    (
+        const Vector3D & centre = Vector3D::ZERO_VECTOR,
+        const double & a = 0.04, const double & b = 0.04, const double & h = 0.06, 
+        int precalcPrecision = 128, int spreadPrecision = 64
+    )
+    {
+        Conductor conductor;
+
+        Surface waist;
+        waist.implicitSurface = [centre, a, b, h] (const Vector3D & coord) -> bool
+        {
+            const auto [x, y, z] = coord - centre;
+            return (x / (a / 2)) * (x / (a / 2)) + (y / (b / 2)) * (y / (b / 2)) - (z / (h / 3) / sqrt(3)) * (z / (h / 3) / sqrt(3)) <= 1.0;
+        };
+        waist.paramSurface = [centre, a, b, h](const double & u, const double & v) -> Vector3D
+        {
+            double theta = u * 2 * PI, z = v * 2 * h - h;
+            double c = sqrt(3) / 3 * h;
+            return centre + Vector3D
+            (
+                a / 2 * sqrt(1 + z * z / c / c) * cos(theta), 
+                b / 2 * sqrt(1 + z * z / c / c) * sin(theta),
+                z
+            );
+        };
+        waist.domain = Surface::DOMAIN_FULL;
+        waist.facingOut = true;
+
+        Surface upperBase = Surface::generatePlate({-a, -b, h}, {2 * a, 0, 0}, {0, 2 * b, 0}, true, Surface::DOMAIN_CIRCLE);
+        Surface lowerBase = Surface::generatePlate({-a, -b, -h}, {2 * a, 0, 0}, {0, 2 * b, 0}, false, Surface::DOMAIN_CIRCLE);
+
+        conductor.surfaces = { waist, upperBase, lowerBase };
+        conductor.precalcPrecision = precalcPrecision;
+        conductor.spreadPrecision = spreadPrecision;
+
+        return conductor;
+    }
 };
 
 const std::function<bool(const double &, const double &)>
     Conductor::Surface::DOMAIN_FULL = [](const double & u, const double & v)
     { return true; };
+const std::function<bool(const double &, const double &)>
+    Conductor::Surface::DOMAIN_CIRCLE = [](const double & u, const double & v)
+    { return (u - 0.5) * (u - 0.5) + (v - 0.5) * (v - 0.5) <= 0.25; };
 
 } // namespace HurryPeng
 

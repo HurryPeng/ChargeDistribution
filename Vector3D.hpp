@@ -21,7 +21,7 @@ public:
         :x(_x), y(_y), z(_z) {}
     Vector3D(const std::initializer_list<long double> & il)
     {
-        if (il.size() != 3) throw std::invalid_argument("Initializing a Vector3D with more ore less than 3 arguments");
+        if (il.size() != 3) throw std::invalid_argument("Initializing a Vector3D with not exactly 3 arguments");
         x = il.begin()[0], y = il.begin()[1], z = il.begin()[2];
     }
     Vector3D(const Vector3D & rhs) { *this = rhs; }

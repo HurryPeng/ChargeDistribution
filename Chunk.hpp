@@ -73,7 +73,7 @@ public:
 
         bool covers(const Vector3D & coord) const
         {
-           return *this == ChunkId(coord);
+            return *this == ChunkId(coord);
         }
 
         operator std::string() const
@@ -85,7 +85,7 @@ public:
 
         bool isSurrounding(const ChunkId & rhs) const
         {
-            return (abs(x - rhs.x) <= 1 && abs(y - rhs.y) <= 1 && abs(z - rhs.z <= 1));
+            return (abs(x - rhs.x) <= 1 && abs(y - rhs.y) <= 1 && abs(z - rhs.z) <= 1);
         }
 
         friend std::ostream & operator<<(std::ostream & lhs, const ChunkId & rhs);
