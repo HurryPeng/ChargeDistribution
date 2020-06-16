@@ -24,7 +24,7 @@ int main()
 
     Chunk chunk({0, 0, 0});
     for (const Chunk::FreeCharge & charge : charges)
-        chunk.assignCharge(charge);
+        chunk.assignCharge(&charge);
     chunk.updateStat();
 
     ElectricField field;

@@ -2,12 +2,14 @@
 #define _HURRYPENG_CHUNK_HPP
 
 #include "Vector3D.hpp"
+#include "FreeCharge.hpp"
 #include "ElectricField.hpp"
 #include <initializer_list>
 #include <set>
 #include <array>
 #include <string>
 #include <sstream>
+#include <math.h>
 
 namespace HurryPeng
 {
@@ -48,6 +50,14 @@ public:
             return x == rhs.x && y == rhs.y && z == rhs.z;
         }
 
+        bool operator<(const ChunkId & rhs) const
+        {
+            if (x != rhs.x) return x < rhs.x;
+            if (y != rhs.y) return y < rhs.y;
+            if (z != rhs.z) return z < rhs.z;
+            return false;
+        }
+
         Vector3D centre() const
         {
             return CHUNK_LENGTH * Vector3D(x + 0.5, y + 0.5, z + 0.5);
@@ -73,31 +83,30 @@ public:
             return ss.str();
         }
 
+        bool isSurrounding(const ChunkId & rhs) const
+        {
+            return (abs(x - rhs.x) <= 1 && abs(y - rhs.y) <= 1 && abs(z - rhs.z <= 1));
+        }
+
         friend std::ostream & operator<<(std::ostream & lhs, const ChunkId & rhs);
+
+        static std::list<ChunkId> chunkIdsInRadius(int radius)
+        {
+            std::list<ChunkId> ids;
+            for (int i = -radius; i < radius; i++)
+                for (int j = -radius; j < radius; j++)
+                    for (int k = -radius; k < radius; k++)
+                        ids.emplace_back(i, j, k);
+            return ids;
+        }
     }; // struct ChunkId
 
-    struct FreeCharge
-    {
-        const static long double Q; // Unit charge that all free chargrs share
-        const static long double M; // Unit mass that all free charges share
-
-        bool isPositive;
-        Vector3D coord;
-        Vector3D vel; // velocity
-
-        FreeCharge(bool _isPositive, const Vector3D & _coord)
-            :isPositive(_isPositive), coord(_coord) { }
-
-        long double q() const { return isPositive ? Q : -Q; } // Returns signed q
-
-        ChunkId chunkId() const { return ChunkId(coord); }
-    }; // struct FreeCharge
-
+// class Chunk
 private:
     ChunkId id;
 
     std::set<const FreeCharge *> freeCharges;
-        // Pointers to FreeCharge objects subordinate to this Chunk
+    // Pointers to FreeCharge objects subordinate to this Chunk
     
     bool fieldUpdated; // Whether chunkField is up-to-date
     ElectricField approxField;
@@ -113,24 +122,29 @@ public:
     std::array<Vector3D, 8> vertexes() const { return id.vertexes(); }
     bool covers(const Vector3D & coord) const { return id.covers(coord); }
 
-    void assignCharge(const FreeCharge & charge)
+    bool isSurrounding(const Chunk & rhs) const { return id.isSurrounding(rhs.id); };
+
+    void assignCharge(const FreeCharge * charge)
     {
         #ifdef _DEBUG
-        if (!covers(charge.coord))
+        if (!covers(charge->coord))
             throw std::invalid_argument("Charge assigned to a Chunk not covering it");
         #endif
-        freeCharges.insert(&charge);
+        freeCharges.insert(charge);
         fieldUpdated = false;
     }
-    void removeCharge(const FreeCharge & charge)
+    void removeCharge(const FreeCharge * charge)
     {
-        freeCharges.erase(&charge);
+        freeCharges.erase(charge);
         fieldUpdated = false;
     }
 
     void updateStat()
     {
         if (fieldUpdated) return;
+
+        preciseField.clear();
+        approxField.clear();
 
         long double positiveChargeSum = 0, negativeChargeSum = 0;
         int positiveChargeCount = 0, negativeChargeCount = 0;
@@ -151,7 +165,7 @@ public:
             }
             preciseField.overlayPointChargeField(charge->coord, charge->q());
         }
-        approxField = ElectricField();
+        
         if (positiveChargeCount != 0)
         {
             positiveChargeCentre /= positiveChargeCount;
@@ -168,10 +182,23 @@ public:
     bool fieldIsUpdated() const { return fieldUpdated; }
     ElectricField getApproxField() const { return approxField; }
     ElectricField getPreciseField() const { return preciseField; }
-};
 
-const long double Chunk::FreeCharge::Q = 1.0E-12;
-const long double Chunk::FreeCharge::M = 1.0;
+    bool operator<(const Chunk & rhs) const
+    {
+        return id < rhs.id;
+    }
+
+    bool operator==(const Chunk & rhs) const
+    {
+        return id == rhs.id;
+    }
+
+    bool operator!=(const Chunk & rhs) const
+    {
+        return !(*this == rhs);
+    }
+
+}; // class Chunk
 
 const double Chunk::CHUNK_LENGTH = 0.01;
 

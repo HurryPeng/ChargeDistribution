@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <list>
 
 void exportElectricField(std::string filename, const HurryPeng::ElectricField & electricField, int scale = 50)
 {
@@ -36,8 +37,19 @@ void exportPointSet(std::string filename, const Container & points)
         auto it = points.end();
         it--;
     }
-    ofs << "}\n";
+    ofs << "\n}\n";
     ofs.close();
+}
+
+template <typename Container>
+std::list<HurryPeng::Vector3D> chargesToPoints(const Container & charges)
+{
+    std::list<HurryPeng::Vector3D> pointSet;
+    for (const HurryPeng::FreeCharge & charge : charges)
+    {
+        pointSet.push_back(charge.coord);
+    }
+    return pointSet;
 }
 
 #endif

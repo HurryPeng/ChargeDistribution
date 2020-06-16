@@ -107,6 +107,14 @@ public:
         return outerProduct(rhs);
     }
 
+    bool operator<(const Vector3D & rhs) const
+    {
+        if (x != rhs.x) return x < rhs.x;
+        if (y != rhs.y) return y < rhs.y;
+        if (z != rhs.z) return z < rhs.z;
+        return false;
+    }
+
     long double norm() const
     {
         return std::sqrt(x * x + y * y + z * z);
@@ -114,7 +122,7 @@ public:
 
     Vector3D unit() const
     {
-        if (this->norm() == 0.0) throw std::invalid_argument("Calculating unit of a zero Vector3D");
+        if (this->norm() == 0.0) return ZERO_VECTOR; //throw std::invalid_argument("Calculating unit of a zero Vector3D");
         return *this / this->norm();
     }
 
@@ -127,6 +135,11 @@ public:
         return *this % rhs / this->norm() / rhs.norm();
     }
 
+    Vector3D projectOnto(const Vector3D & v) const
+    {
+        return this->innerProduct(v) * v.unit();
+    }
+
     operator std::string() const
     {
         std::stringstream ss;
@@ -135,7 +148,9 @@ public:
     }
 
     friend std::ostream & operator<<(std::ostream & lhs, const Vector3D & rhs);
-};
+
+    static const Vector3D ZERO_VECTOR;
+}; // class Vector3D
 
 Vector3D operator*(const long double & lhs, const Vector3D & rhs)
 {
@@ -158,6 +173,8 @@ std::ostream & operator<<(std::ostream & lhs, const Vector3D & rhs)
     lhs << std::string(rhs);
     return lhs;
 }
+
+const Vector3D Vector3D::ZERO_VECTOR = {0, 0, 0};
 
 } // namespace HurryPeng
 

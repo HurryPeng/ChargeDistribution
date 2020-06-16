@@ -26,6 +26,12 @@ public:
         return field;
     }
 
+    void clear()
+    {
+        uniformField = Vector3D::ZERO_VECTOR;
+        customOverlays.clear();
+    }
+
     void overlayUniformField(const Vector3D & newUniformField)
     {
         uniformField += newUniformField;
@@ -53,7 +59,7 @@ public:
     {
         return uniformField == Vector3D(0, 0, 0) && customOverlays.empty();
     }
-};
+}; // class ElectricField
 
 } // namespace HurryPeng
 
