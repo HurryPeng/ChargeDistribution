@@ -17,38 +17,57 @@ namespace HurryPeng
 class Region
 {
 private:
+    bool initialised = false;
+
     const int radius = 8;
     std::map<Chunk::ChunkId, Chunk> chunks;
     std::vector<Conductor> conductors;
-    ElectricField outerField;
 
-    const long double dt;
+    long double dt;
+    long double elapsed = 0.0;
+
     int tick;
+    long double dynamicConvergenceTime;
+        // If set to 0.0, then dynamic tick adjustment will be disabled. 
+        // Otherwise, dt will be adjusted every tick to make average dx
+        // begin with 0.8 * CHUNK_LENGTH on tick 0, and gradually decay to
+        // 0.2 * CHUNK_LENGTH when elpased >= dynamicConvergenceTick
 
 public:
+    ElectricField outerField;
+
+    std::string summary;
+
     Region() = delete;
-    Region(const int & _radius, std::initializer_list<Conductor> _conductors,
-        const ElectricField & _outerField, const long double & _dt)
-        :radius(_radius), conductors(_conductors), outerField(_outerField), dt(_dt), tick(0)
+    Region(const int & _radius, std::initializer_list<Conductor> _conductors, 
+        const ElectricField & _outerField, const long double & _dt, 
+        const std::string & _summary = "", const long double & _dynamicConvergenceTime = 0.0)
+        :radius(_radius), conductors(_conductors), outerField(_outerField), dt(_dt),
+        tick(0), summary(_summary), dynamicConvergenceTime(_dynamicConvergenceTime) {}
+
+    void initialise()
     {
+        initialised = true;
+
         for (const Chunk::ChunkId chunkId : Chunk::ChunkId::chunkIdsInRadius(radius))
             chunks.emplace(std::make_pair(chunkId, Chunk(chunkId)));
         
         for (Conductor & conductor : conductors)
         {
-            conductor.precalcApproxNormalVector(radius);
+            conductor.precalcApproxClosestSurfacePoint(radius);
             conductor.spreadCharges(true);
 
             for (const FreeCharge & charge : conductor.boundCharges)
                 chunks.at(Chunk::ChunkId(charge.coord)).assignCharge(&charge);
         }
-
     }
 
     struct Stat
     {
         int tick = 0;
         int count = 0; // Number of free charges
+        long double dt = 0.0; // Current dt
+        long double elapsed = 0.0; // Elapsed time
         long double dxEstm = 0.0; // Average dx before elimination
         long double dxElim = 0.0; // Average dx after elimination
         long double vel = 0.0; // Average velocity
@@ -62,6 +81,7 @@ public:
         {
             std::stringstream ss;
             ss << "Tick " << tick << " statistics: " << '\n';
+            ss << "dt, elapsed = " << dt << ", " << elapsed << '\n';
             ss << "dxEstm, dxElim = " << dxEstm << ", " << dxElim << '\n';
             ss << "vel, acc = " << vel << ", " << acc << '\n';
             ss << "elim, brute = " << elimRate << ", " << bruteElimRate << '\n';
@@ -72,6 +92,8 @@ public:
 
     Stat proceed()
     {
+        if (!initialised) initialise();
+
         Stat stat;
 
         tick++;
@@ -86,24 +108,26 @@ public:
 
                 Vector3D acc = charge.accel(outerField);
                 Chunk & curChunk = chunks.at(Chunk::ChunkId(charge.coord));
-                for (const auto & pr : chunks)
+                for (const auto & [chunkId, chunk] : chunks)
                 {
-                    const Chunk & anyChunk = pr.second;
-                    if (anyChunk.isSurrounding(curChunk))
-                        acc += charge.accel(anyChunk.getPreciseField());
-                    else acc += charge.accel(anyChunk.getApproxField());
+                    if (chunk.isSurrounding(curChunk))
+                        acc += charge.accel(chunk.getPreciseField());
+                    else acc += charge.accel(chunk.getApproxField());
                 }
 
                 // Max vel / acc limits
-                if (charge.vel.norm() >= 0.01 / dt)
-                    charge.vel = charge.vel.unit() * 0.01 / dt;
-                if (acc.norm() >= 0.01 / dt / dt * 2)
-                    acc = acc.unit() * 0.01 / dt / dt * 2;
+                if (charge.vel.norm() >= Chunk::CHUNK_LENGTH / dt)
+                    charge.vel = charge.vel.unit() * Chunk::CHUNK_LENGTH / dt;
+                if (acc.norm() >= Chunk::CHUNK_LENGTH / dt / dt * 2)
+                    acc = acc.unit() * Chunk::CHUNK_LENGTH / dt / dt * 2;
 
+                // velocity is "nerfed" to 0.7 to avoid too much oscillation
+                charge.vel *= 0.7;
                 Vector3D dx = charge.vel * dt + acc * dt * dt / 2;
-                if (dx.norm() >= 0.01) dx = dx.unit() * 0.01; // //
+                if (dx.norm() >= Chunk::CHUNK_LENGTH) dx = dx.unit() * Chunk::CHUNK_LENGTH; // //
 
-                if (acc.norm() >= 10000) stat.superFoceRate++, stat.acc -= acc.norm(); //std::cerr << acc << dx << '\n';
+                if (acc.norm() >= 1E8 * Chunk::CHUNK_LENGTH * Chunk::CHUNK_LENGTH)
+                    stat.superFoceRate++, stat.acc -= acc.norm(); //std::cerr << acc << dx << '\n';
                 stat.acc += acc.norm();
                 charge.vel += acc * dt;
 
@@ -114,8 +138,8 @@ public:
                 {
                     stat.elimRate++; //
                     const int & exceedId0 = accumExceedIds[0];
-                    const Vector3D & norm0 = conductor.approxNormalVector[curChunk.getId()][exceedId0];
-
+                    const Vector3D & norm0 = conductor.preciseNormalVectorAround(charge.coord, exceedId0);
+                    
                     Vector3D dxPerpendicular = dx.projectOnto(norm0);
                     dx -= 1.0 * dxPerpendicular; // Erase perpendicular part from dx
                     charge.vel -= charge.vel.projectOnto(norm0);
@@ -132,8 +156,8 @@ public:
                 {
                     const int & exceedId1 = accumExceedIds[0];
                     const int & exceedId2 = accumExceedIds[1];
-                    const Vector3D & norm1 = conductor.approxNormalVector[curChunk.getId()][exceedId1];
-                    const Vector3D & norm2 = conductor.approxNormalVector[curChunk.getId()][exceedId2];
+                    const Vector3D & norm1 = conductor.preciseNormalVectorAround(charge.coord, exceedId1);
+                    const Vector3D & norm2 = conductor.preciseNormalVectorAround(charge.coord, exceedId2);
 
                     Vector3D norm0 = (norm1 * norm2).unit();
                     dx = dx.projectOnto(norm0);
@@ -162,6 +186,10 @@ public:
             }
         }
 
+        elapsed += dt;
+
+        stat.dt = dt;
+        stat.elapsed = elapsed;
         stat.dxElim /= stat.count;
         stat.dxEstm /= stat.count;
         stat.vel /= stat.count;
@@ -171,16 +199,37 @@ public:
         stat.stayRate /= stat.count;
         stat.superFoceRate /= stat.count;
 
+        if (dynamicConvergenceTime != 0.0)
+        {
+            long double dxExpected = 0.2 * Chunk::CHUNK_LENGTH;
+            if (elapsed <= dynamicConvergenceTime)
+                dxExpected = (0.5 + 0.3 * cos(PI / dynamicConvergenceTime * elapsed)) * Chunk::CHUNK_LENGTH;
+            dt = dxExpected / stat.dxEstm * dt;
+        }
+
         return stat;
     }
 
     int getTick() const { return tick; }
 
-    std::list<std::pair<Vector3D, long double>> calcSurfaceField(int precision, long double distance) const
+    const std::vector<Conductor> & getConductors() const { return conductors; }
+
+    std::list<std::pair<Vector3D, long double>> discreteSurfaceField(int precision, long double distance) const
     {
         std::list<std::pair<Vector3D, long double>> fields;
         for (const Conductor & conductor : conductors)
-            fields.splice(fields.end(), conductor.calcSurfaceField(precision, distance));
+            fields.splice(fields.end(), conductor.discreteSurfaceField(precision, distance));
+        return fields;
+    }
+
+    std::vector<std::vector<std::vector<std::vector<std::optional<long double>>>>>
+        paramSurfaceField(int precision, long double distance)
+        // paramSurfaceField[conductorId][surfaceId][uInt][vInt] = intensity
+    {
+        std::vector<std::vector<std::vector<std::vector<std::optional<long double>>>>> fields(conductors.size());
+        for (int conductorId = 0; conductorId < conductors.size(); conductorId++)
+            fields[conductorId] = conductors[conductorId].paramSurfaceField(precision, distance);
+
         return fields;
     }
 

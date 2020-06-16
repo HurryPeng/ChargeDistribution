@@ -11,7 +11,7 @@ int main()
     Conductor conductor = Conductor::generateTimeglass(Vector3D::ZERO_VECTOR, 0.04, 0.04, 0.06, 128, 64);
     conductor.spreadCharges(true);
 
-    exportPointSet("points.txt", chargesToPoints(conductor.boundCharges));
+    exportPointSet("points.txt", chargesToPointSet(conductor.boundCharges));
 
     return 0;
 }

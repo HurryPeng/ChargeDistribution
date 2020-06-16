@@ -1,0 +1,1293 @@
+Twisted Timeglass Conductor in Two Point Charge Fields, Precision 128
+Precalculation finished in 11.2205 seconds.
+
+Exporting point set... done
+Tick 1 statistics:
+dt, elapsed = 0.001, 0.001
+dxEstm, dxElim = 0.000628347, 0.000595967
+vel, acc = 1.19184, 1252.8
+elim, brute = 0.0367145, 7.61711e-05
+stay, superforce = 0, 0.000228513
+Tick 1 finished in 29.8718 seconds.
+
+Group finished
+Exporting point set... done
+Tick 2 statistics:
+dt, elapsed = 0.0127309, 0.0137309
+dxEstm, dxElim = 0.00999903, 0.00704904
+vel, acc = 1.42499, 123.399
+elim, brute = 0.681681, 0.0417672
+stay, superforce = 0, 0
+Tick 2 finished in 32.3813 seconds.
+
+Group finished
+Exporting point set... done
+Tick 3 statistics:
+dt, elapsed = 0.0100477, 0.0237786
+dxEstm, dxElim = 0.00963356, 0.00672766
+vel, acc = 1.58389, 197.283
+elim, brute = 0.700444, 0.0572807
+stay, superforce = 0.000101562, 0
+Tick 3 finished in 30.4816 seconds.
+
+Group finished
+Exporting point set... done
+Tick 4 statistics:
+dt, elapsed = 0.00800905, 0.0317877
+dxEstm, dxElim = 0.00961983, 0.00681218
+vel, acc = 1.83799, 307.196
+elim, brute = 0.68653, 0.0542085
+stay, superforce = 0.000380856, 0
+Tick 4 finished in 29.3247 seconds.
+
+Group finished
+Exporting point set... done
+Tick 5 statistics:
+dt, elapsed = 0.00618954, 0.0379772
+dxEstm, dxElim = 0.00956445, 0.00642254
+vel, acc = 2.03344, 489.744
+elim, brute = 0.703694, 0.0467437
+stay, superforce = 0.00101562, 0
+Tick 5 finished in 34.5341 seconds.
+
+Group finished
+Exporting point set... done
+Tick 6 statistics:
+dt, elapsed = 0.00466192, 0.0426391
+dxEstm, dxElim = 0.00915867, 0.00584187
+vel, acc = 2.05308, 723.606
+elim, brute = 0.727815, 0.03707
+stay, superforce = 0.00218357, 0
+Tick 6 finished in 37.8832 seconds.
+
+Group finished
+Exporting point set... done
+Tick 7 statistics:
+dt, elapsed = 0.00356749, 0.0462066
+dxEstm, dxElim = 0.00795431, 0.00503091
+vel, acc = 1.95263, 933.719
+elim, brute = 0.722255, 0.0344547
+stay, superforce = 0.00256443, 0
+Tick 7 finished in 44.7292 seconds.
+
+Group finished
+Exporting point set... done
+Tick 8 statistics:
+dt, elapsed = 0.00307118, 0.0492778
+dxEstm, dxElim = 0.00695007, 0.00433698
+vel, acc = 1.86123, 1071.31
+elim, brute = 0.716694, 0.0323727
+stay, superforce = 0.00286911, 0
+Tick 8 finished in 42.4421 seconds.
+
+Group finished
+Exporting point set... done
+Tick 9 statistics:
+dt, elapsed = 0.00296153, 0.0522393
+dxEstm, dxElim = 0.00651858, 0.00391944
+vel, acc = 1.73436, 1108.58
+elim, brute = 0.734188, 0.0328551
+stay, superforce = 0.00375778, 0
+Tick 9 finished in 42.3796 seconds.
+
+Group finished
+Exporting point set... done
+Tick 10 statistics:
+dt, elapsed = 0.00297828, 0.0552176
+dxEstm, dxElim = 0.00636501, 0.00373232
+vel, acc = 1.67622, 1107.25
+elim, brute = 0.749499, 0.0333376
+stay, superforce = 0.00424019, 0
+Tick 10 finished in 42.9571 seconds.
+
+Group finished
+Exporting point set... done
+Tick 11 statistics:
+dt, elapsed = 0.00299599, 0.0582136
+dxEstm, dxElim = 0.0063003, 0.00363979
+vel, acc = 1.63991, 1101.66
+elim, brute = 0.75808, 0.0339469
+stay, superforce = 0.00401168, 0
+Tick 11 finished in 43.409 seconds.
+
+Group finished
+Exporting point set... done
+Tick 12 statistics:
+dt, elapsed = 0.00296948, 0.0611831
+dxEstm, dxElim = 0.00616831, 0.00356585
+vel, acc = 1.6155, 1102.01
+elim, brute = 0.763286, 0.0333883
+stay, superforce = 0.00462105, 0
+Tick 12 finished in 42.5984 seconds.
+
+Group finished
+Exporting point set... done
+Tick 13 statistics:
+dt, elapsed = 0.00292859, 0.0641117
+dxEstm, dxElim = 0.00604658, 0.0034649
+vel, acc = 1.59821, 1115.67
+elim, brute = 0.764174, 0.0339215
+stay, superforce = 0.00454488, 0
+Tick 13 finished in 42.2307 seconds.
+
+Group finished
+Exporting point set... done
+Tick 14 statistics:
+dt, elapsed = 0.00286766, 0.0669793
+dxEstm, dxElim = 0.00588274, 0.00334753
+vel, acc = 1.56595, 1130.53
+elim, brute = 0.763133, 0.0348356
+stay, superforce = 0.0052812, 0
+Tick 14 finished in 41.1853 seconds.
+
+Group finished
+Exporting point set... done
+Tick 15 statistics:
+dt, elapsed = 0.00280717, 0.0697865
+dxEstm, dxElim = 0.00572919, 0.00323952
+vel, acc = 1.56274, 1159.3
+elim, brute = 0.761204, 0.0350387
+stay, superforce = 0.00543354, 0
+Tick 15 finished in 41.3102 seconds.
+
+Group finished
+Exporting point set... done
+Tick 16 statistics:
+dt, elapsed = 0.0027427, 0.0725292
+dxEstm, dxElim = 0.00557871, 0.00317259
+vel, acc = 1.57026, 1182.11
+elim, brute = 0.765114, 0.0339977
+stay, superforce = 0.00548432, 0
+Tick 16 finished in 42.0178 seconds.
+
+Group finished
+Exporting point set... done
+Tick 17 statistics:
+dt, elapsed = 0.00267376, 0.075203
+dxEstm, dxElim = 0.0054429, 0.00308565
+vel, acc = 1.55549, 1210.91
+elim, brute = 0.762092, 0.0352165
+stay, superforce = 0.00558588, 0
+Tick 17 finished in 43.0142 seconds.
+
+Group finished
+Exporting point set... done
+Tick 18 statistics:
+dt, elapsed = 0.00259479, 0.0777978
+dxEstm, dxElim = 0.00527243, 0.00299269
+vel, acc = 1.56341, 1245.67
+elim, brute = 0.757319, 0.0343786
+stay, superforce = 0.00510347, 0
+Tick 18 finished in 45.9645 seconds.
+
+Group finished
+Exporting point set... done
+Tick 19 statistics:
+dt, elapsed = 0.00252454, 0.0803223
+dxEstm, dxElim = 0.0051415, 0.00293905
+vel, acc = 1.57361, 1279.44
+elim, brute = 0.760061, 0.0333376
+stay, superforce = 0.00591596, 0
+Tick 19 finished in 42.8463 seconds.
+
+Group finished
+Exporting point set... done
+Tick 20 statistics:
+dt, elapsed = 0.00244574, 0.0827681
+dxEstm, dxElim = 0.00498799, 0.00287197
+vel, acc = 1.58838, 1317.08
+elim, brute = 0.756506, 0.0340739
+stay, superforce = 0.00530659, 0
+Tick 20 finished in 42.5795 seconds.
+
+Group finished
+Exporting point set... done
+Tick 21 statistics:
+dt, elapsed = 0.00237172, 0.0851398
+dxEstm, dxElim = 0.00483143, 0.00279139
+vel, acc = 1.5771, 1346.82
+elim, brute = 0.756278, 0.0342262
+stay, superforce = 0.00596674, 0
+Tick 21 finished in 43.0992 seconds.
+
+Group finished
+Exporting point set... done
+Tick 22 statistics:
+dt, elapsed = 0.0023061, 0.0874459
+dxEstm, dxElim = 0.00470968, 0.00273897
+vel, acc = 1.60492, 1390.03
+elim, brute = 0.756354, 0.0317634
+stay, superforce = 0.00573823, 0
+Tick 22 finished in 43.331 seconds.
+
+Group finished
+Exporting point set... done
+Tick 23 statistics:
+dt, elapsed = 0.00223426, 0.0896801
+dxEstm, dxElim = 0.00457176, 0.00268295
+vel, acc = 1.60457, 1419.51
+elim, brute = 0.752952, 0.0313317
+stay, superforce = 0.00566205, 0
+Tick 23 finished in 42.5155 seconds.
+
+Group finished
+Exporting point set... done
+Tick 24 statistics:
+dt, elapsed = 0.00216655, 0.0918467
+dxEstm, dxElim = 0.00442077, 0.00259768
+vel, acc = 1.59558, 1454.18
+elim, brute = 0.752063, 0.0296814
+stay, superforce = 0.00566205, 0
+Tick 24 finished in 42.8503 seconds.
+
+Group finished
+Exporting point set... done
+Tick 25 statistics:
+dt, elapsed = 0.00211151, 0.0939582
+dxEstm, dxElim = 0.00430542, 0.00254957
+vel, acc = 1.61179, 1488.49
+elim, brute = 0.75059, 0.028615
+stay, superforce = 0.00556049, 0
+Tick 25 finished in 41.9318 seconds.
+
+Group finished
+Exporting point set... done
+Tick 26 statistics:
+dt, elapsed = 0.00205394, 0.0960121
+dxEstm, dxElim = 0.0041934, 0.0025063
+vel, acc = 1.62367, 1523.91
+elim, brute = 0.749143, 0.0306716
+stay, superforce = 0.00538276, 0
+Tick 26 finished in 42.4125 seconds.
+
+Group finished
+Exporting point set... done
+Tick 27 statistics:
+dt, elapsed = 0.00199461, 0.0980067
+dxEstm, dxElim = 0.00407921, 0.00245526
+vel, acc = 1.63849, 1564.02
+elim, brute = 0.742719, 0.0288689
+stay, superforce = 0.00558588, 0
+Tick 27 finished in 42.3216 seconds.
+
+Group finished
+Exporting point set... done
+Tick 28 statistics:
+dt, elapsed = 0.00193694, 0.0999437
+dxEstm, dxElim = 0.00395683, 0.00239098
+vel, acc = 1.62485, 1588.74
+elim, brute = 0.743913, 0.0267868
+stay, superforce = 0.00545893, 0
+Tick 28 finished in 44.1675 seconds.
+
+Group finished
+Exporting point set... done
+Tick 29 statistics:
+dt, elapsed = 0.0018871, 0.101831
+dxEstm, dxElim = 0.00384464, 0.00233224
+vel, acc = 1.63559, 1628.17
+elim, brute = 0.743354, 0.0277263
+stay, superforce = 0.00543354, 0
+Tick 29 finished in 44.4464 seconds.
+
+Group finished
+Exporting point set... done
+Tick 30 statistics:
+dt, elapsed = 0.00184216, 0.103673
+dxEstm, dxElim = 0.00375922, 0.00229485
+vel, acc = 1.64098, 1659.54
+elim, brute = 0.744116, 0.0270915
+stay, superforce = 0.00548432, 0
+Tick 30 finished in 44.6982 seconds.
+
+Group finished
+Exporting point set... done
+Tick 31 statistics:
+dt, elapsed = 0.00179119, 0.105464
+dxEstm, dxElim = 0.00364172, 0.00223234
+vel, acc = 1.63388, 1687.71
+elim, brute = 0.744903, 0.0272947
+stay, superforce = 0.00517964, 0
+Tick 31 finished in 44.8292 seconds.
+
+Group finished
+Exporting point set... done
+Tick 32 statistics:
+dt, elapsed = 0.00175186, 0.107216
+dxEstm, dxElim = 0.00356784, 0.0021946
+vel, acc = 1.6418, 1725.01
+elim, brute = 0.73853, 0.0267361
+stay, superforce = 0.00576362, 0
+Tick 32 finished in 45.5407 seconds.
+
+Group finished
+Exporting point set... done
+Tick 33 statistics:
+dt, elapsed = 0.00170484, 0.108921
+dxEstm, dxElim = 0.00345351, 0.0021418
+vel, acc = 1.63757, 1747.78
+elim, brute = 0.737413, 0.025238
+stay, superforce = 0.00571283, 0
+Tick 33 finished in 65.7291 seconds.
+
+Group finished
+Exporting point set... done
+Tick 34 statistics:
+dt, elapsed = 0.00167177, 0.110593
+dxEstm, dxElim = 0.00337722, 0.00209831
+vel, acc = 1.63845, 1779.8
+elim, brute = 0.739799, 0.0245017
+stay, superforce = 0.00556049, 0
+Tick 34 finished in 59.1739 seconds.
+
+Group finished
+Exporting point set... done
+Tick 35 statistics:
+dt, elapsed = 0.00163571, 0.112228
+dxEstm, dxElim = 0.00329172, 0.00205776
+vel, acc = 1.6399, 1801.33
+elim, brute = 0.735432, 0.0250603
+stay, superforce = 0.00540815, 0
+Tick 35 finished in 49.3076 seconds.
+
+Group finished
+Exporting point set... done
+Tick 36 statistics:
+dt, elapsed = 0.00160294, 0.113831
+dxEstm, dxElim = 0.00321626, 0.0020144
+vel, acc = 1.63436, 1826.02
+elim, brute = 0.737108, 0.0247048
+stay, superforce = 0.0052812, 0
+Tick 36 finished in 53.1264 seconds.
+
+Group finished
+Exporting point set... done
+Tick 37 statistics:
+dt, elapsed = 0.00157018, 0.115401
+dxEstm, dxElim = 0.00314552, 0.00196949
+vel, acc = 1.62968, 1853.12
+elim, brute = 0.736829, 0.0233591
+stay, superforce = 0.00512886, 0
+Tick 37 finished in 46.7161 seconds.
+
+Group finished
+Exporting point set... done
+Tick 38 statistics:
+dt, elapsed = 0.00153678, 0.116938
+dxEstm, dxElim = 0.00306472, 0.00193235
+vel, acc = 1.62513, 1872.55
+elim, brute = 0.736676, 0.0226482
+stay, superforce = 0.00492573, 0
+Tick 38 finished in 43.1301 seconds.
+
+Group finished
+Exporting point set... done
+Tick 39 statistics:
+dt, elapsed = 0.00150932, 0.118448
+dxEstm, dxElim = 0.00300377, 0.0018928
+vel, acc = 1.62406, 1902.35
+elim, brute = 0.738708, 0.0229021
+stay, superforce = 0.00520503, 0
+Tick 39 finished in 42.3976 seconds.
+
+Group finished
+Exporting point set... done
+Tick 40 statistics:
+dt, elapsed = 0.00147944, 0.119927
+dxEstm, dxElim = 0.00293033, 0.00185915
+vel, acc = 1.63102, 1924.3
+elim, brute = 0.737464, 0.0224959
+stay, superforce = 0.00492573, 0
+Tick 40 finished in 42.8503 seconds.
+
+Group finished
+Exporting point set... done
+Tick 41 statistics:
+dt, elapsed = 0.0014549, 0.121382
+dxEstm, dxElim = 0.00287899, 0.00183935
+vel, acc = 1.63799, 1944.13
+elim, brute = 0.735102, 0.0232322
+stay, superforce = 0.00490034, 0
+Tick 41 finished in 42.9063 seconds.
+
+Group finished
+Exporting point set... done
+Tick 42 statistics:
+dt, elapsed = 0.00142605, 0.122808
+dxEstm, dxElim = 0.00282016, 0.00181402
+vel, acc = 1.64469, 1970
+elim, brute = 0.732411, 0.0222928
+stay, superforce = 0.00490034, 0
+Tick 42 finished in 42.7773 seconds.
+
+Group finished
+Exporting point set... done
+Tick 43 statistics:
+dt, elapsed = 0.00139816, 0.124206
+dxEstm, dxElim = 0.00274996, 0.00176763
+vel, acc = 1.62431, 1508.91
+elim, brute = 0.732385, 0.0223181
+stay, superforce = 0.0050019, 0.0466675
+Tick 43 finished in 42.5195 seconds.
+
+Group finished
+Exporting point set... done
+Tick 44 statistics:
+dt, elapsed = 0.00137831, 0.125584
+dxEstm, dxElim = 0.00270661, 0.00174786
+vel, acc = 1.64124, 1509.66
+elim, brute = 0.734061, 0.0214803
+stay, superforce = 0.00490034, 0.0480132
+Tick 44 finished in 42.8973 seconds.
+
+Group finished
+Exporting point set... done
+Tick 45 statistics:
+dt, elapsed = 0.00135421, 0.126939
+dxEstm, dxElim = 0.00264194, 0.00171717
+vel, acc = 1.6237, 1490.11
+elim, brute = 0.732005, 0.0207439
+stay, superforce = 0.00512886, 0.0480894
+Tick 45 finished in 42.4095 seconds.
+
+Group finished
+Exporting point set... done
+Tick 46 statistics:
+dt, elapsed = 0.00133796, 0.128277
+dxEstm, dxElim = 0.00257398, 0.0016671
+vel, acc = 1.59006, 1490.61
+elim, brute = 0.735255, 0.0201092
+stay, superforce = 0.00479878, 0.0465913
+Tick 46 finished in 42.3706 seconds.
+
+Group finished
+Exporting point set... done
+Tick 47 statistics:
+dt, elapsed = 0.00133247, 0.129609
+dxEstm, dxElim = 0.00257062, 0.00166745
+vel, acc = 1.61492, 1513.77
+elim, brute = 0.736372, 0.0202869
+stay, superforce = 0.00457027, 0.0478355
+Tick 47 finished in 45.4708 seconds.
+
+Group finished
+Exporting point set... done
+Tick 48 statistics:
+dt, elapsed = 0.00130543, 0.130914
+dxEstm, dxElim = 0.00251007, 0.00164359
+vel, acc = 1.62056, 1497.92
+elim, brute = 0.733807, 0.0206678
+stay, superforce = 0.00490034, 0.0488003
+Tick 48 finished in 42.0138 seconds.
+
+Group finished
+Exporting point set... done
+Tick 49 statistics:
+dt, elapsed = 0.00128775, 0.132202
+dxEstm, dxElim = 0.00247483, 0.00162104
+vel, acc = 1.61665, 1496.22
+elim, brute = 0.735178, 0.0204393
+stay, superforce = 0.00487495, 0.0489019
+Tick 49 finished in 41.4261 seconds.
+
+Group finished
+Exporting point set... done
+Tick 50 statistics:
+dt, elapsed = 0.00126748, 0.13347
+dxEstm, dxElim = 0.00241403, 0.00158514
+vel, acc = 1.59279, 1495.14
+elim, brute = 0.734823, 0.0199822
+stay, superforce = 0.00530659, 0.0480386
+Tick 50 finished in 44.5092 seconds.
+
+Group finished
+Exporting point set... done
+Tick 51 statistics:
+dt, elapsed = 0.00125902, 0.134729
+dxEstm, dxElim = 0.00238684, 0.00157195
+vel, acc = 1.60164, 1501.82
+elim, brute = 0.736092, 0.0200838
+stay, superforce = 0.00487495, 0.0483433
+Tick 51 finished in 42.1727 seconds.
+
+Group finished
+Exporting point set... done
+Tick 52 statistics:
+dt, elapsed = 0.00124581, 0.135975
+dxEstm, dxElim = 0.00235521, 0.00154912
+vel, acc = 1.58943, 1491.99
+elim, brute = 0.736778, 0.0195252
+stay, superforce = 0.004748, 0.0492066
+Tick 52 finished in 43.341 seconds.
+
+Group finished
+Exporting point set... done
+Tick 53 statistics:
+dt, elapsed = 0.00123124, 0.137206
+dxEstm, dxElim = 0.0023099, 0.00152243
+vel, acc = 1.57449, 1497.86
+elim, brute = 0.735661, 0.0193221
+stay, superforce = 0.00507808, 0.0479116
+Tick 53 finished in 43.5919 seconds.
+
+Group finished
+Exporting point set... done
+Tick 54 statistics:
+dt, elapsed = 0.00122356, 0.138429
+dxEstm, dxElim = 0.00229187, 0.00150821
+vel, acc = 1.58296, 1488.78
+elim, brute = 0.738733, 0.0192459
+stay, superforce = 0.00490034, 0.0503491
+Tick 54 finished in 42.5485 seconds.
+
+Group finished
+Exporting point set... done
+Tick 55 statistics:
+dt, elapsed = 0.00120926, 0.139639
+dxEstm, dxElim = 0.00225865, 0.00149535
+vel, acc = 1.58024, 1500.14
+elim, brute = 0.740079, 0.0185858
+stay, superforce = 0.00467183, 0.0488511
+Tick 55 finished in 46.5522 seconds.
+
+Group finished
+Exporting point set... done
+Tick 56 statistics:
+dt, elapsed = 0.00119744, 0.140836
+dxEstm, dxElim = 0.00223649, 0.00148354
+vel, acc = 1.58667, 1501.93
+elim, brute = 0.738225, 0.0187381
+stay, superforce = 0.00464644, 0.0501714
+Tick 56 finished in 41.9088 seconds.
+
+Group finished
+Exporting point set... done
+Tick 57 statistics:
+dt, elapsed = 0.0011832, 0.142019
+dxEstm, dxElim = 0.00219289, 0.00146212
+vel, acc = 1.57348, 1489.82
+elim, brute = 0.739038, 0.0189412
+stay, superforce = 0.00457027, 0.0489019
+Tick 57 finished in 44.0326 seconds.
+
+Group finished
+Exporting point set... done
+Tick 58 statistics:
+dt, elapsed = 0.00117896, 0.143198
+dxEstm, dxElim = 0.00218279, 0.00145117
+vel, acc = 1.56918, 1479.28
+elim, brute = 0.741856, 0.0184588
+stay, superforce = 0.00462105, 0.0511616
+Tick 58 finished in 45.0161 seconds.
+
+Group finished
+Exporting point set... done
+Tick 59 statistics:
+dt, elapsed = 0.00116762, 0.144366
+dxEstm, dxElim = 0.00215997, 0.00143984
+vel, acc = 1.5795, 1507.68
+elim, brute = 0.741297, 0.0182303
+stay, superforce = 0.004748, 0.0497397
+Tick 59 finished in 44.0536 seconds.
+
+Group finished
+Exporting point set... done
+Tick 60 statistics:
+dt, elapsed = 0.00115695, 0.145523
+dxEstm, dxElim = 0.00212714, 0.00142801
+vel, acc = 1.57074, 1495.61
+elim, brute = 0.740231, 0.0170116
+stay, superforce = 0.00439254, 0.0493843
+Tick 60 finished in 43.9497 seconds.
+
+Group finished
+Exporting point set... done
+Tick 61 statistics:
+dt, elapsed = 0.00115328, 0.146676
+dxEstm, dxElim = 0.00212387, 0.00142826
+vel, acc = 1.58061, 1499.63
+elim, brute = 0.740587, 0.0176463
+stay, superforce = 0.00459566, 0.0500698
+Tick 61 finished in 44.8122 seconds.
+
+Group finished
+Exporting point set... done
+Tick 62 statistics:
+dt, elapsed = 0.00114145, 0.147818
+dxEstm, dxElim = 0.00209301, 0.00140444
+vel, acc = 1.5615, 1487.76
+elim, brute = 0.738708, 0.0181795
+stay, superforce = 0.00459566, 0.0498921
+Tick 62 finished in 45.6917 seconds.
+
+Group finished
+Exporting point set... done
+Tick 63 statistics:
+dt, elapsed = 0.00113731, 0.148955
+dxEstm, dxElim = 0.00207487, 0.00139192
+vel, acc = 1.56144, 1483.74
+elim, brute = 0.741272, 0.0174178
+stay, superforce = 0.00457027, 0.0508315
+Tick 63 finished in 44.0236 seconds.
+
+Group finished
+Exporting point set... done
+Tick 64 statistics:
+dt, elapsed = 0.00113479, 0.15009
+dxEstm, dxElim = 0.00206021, 0.00138771
+vel, acc = 1.56233, 1486.72
+elim, brute = 0.740434, 0.0164276
+stay, superforce = 0.00462105, 0.0505776
+Tick 64 finished in 46.0415 seconds.
+
+Group finished
+Exporting point set... done
+Tick 65 statistics:
+dt, elapsed = 0.00113281, 0.151222
+dxEstm, dxElim = 0.00207152, 0.00139732
+vel, acc = 1.58034, 1487.83
+elim, brute = 0.742745, 0.0169608
+stay, superforce = 0.00429097, 0.0521518
+Tick 65 finished in 45.2969 seconds.
+
+Group finished
+Exporting point set... done
+Tick 66 statistics:
+dt, elapsed = 0.001118, 0.15234
+dxEstm, dxElim = 0.002028, 0.00137515
+vel, acc = 1.56182, 1479.53
+elim, brute = 0.742059, 0.017494
+stay, superforce = 0.00413863, 0.0499683
+Tick 66 finished in 44.9071 seconds.
+
+Group finished
+Exporting point set... done
+Tick 67 statistics:
+dt, elapsed = 0.00112124, 0.153462
+dxEstm, dxElim = 0.00204346, 0.00138214
+vel, acc = 1.57424, 1482.91
+elim, brute = 0.742491, 0.0171385
+stay, superforce = 0.00434175, 0.051771
+Tick 67 finished in 43.8127 seconds.
+
+Group finished
+Exporting point set... done
+Tick 68 statistics:
+dt, elapsed = 0.00111094, 0.154573
+dxEstm, dxElim = 0.00201295, 0.00136595
+vel, acc = 1.5563, 1480.63
+elim, brute = 0.740688, 0.017367
+stay, superforce = 0.00451949, 0.0504507
+Tick 68 finished in 44.3734 seconds.
+
+Group finished
+Exporting point set... done
+Tick 69 statistics:
+dt, elapsed = 0.00111318, 0.155686
+dxEstm, dxElim = 0.00200932, 0.00135905
+vel, acc = 1.55163, 1490.57
+elim, brute = 0.742542, 0.0180018
+stay, superforce = 0.00484956, 0.0495112
+Tick 69 finished in 44.0746 seconds.
+
+Group finished
+Exporting point set... done
+Tick 70 statistics:
+dt, elapsed = 0.00111398, 0.1568
+dxEstm, dxElim = 0.00201306, 0.00136329
+vel, acc = 1.56025, 1493.31
+elim, brute = 0.743938, 0.017494
+stay, superforce = 0.00492573, 0.050019
+Tick 70 finished in 44.3944 seconds.
+
+Group finished
+Exporting point set... done
+Tick 71 statistics:
+dt, elapsed = 0.00111003, 0.15791
+dxEstm, dxElim = 0.00200729, 0.00136065
+vel, acc = 1.55864, 1488.98
+elim, brute = 0.74244, 0.0180018
+stay, superforce = 0.00490034, 0.0505015
+Tick 71 finished in 44.8142 seconds.
+
+Group finished
+Exporting point set... done
+Tick 72 statistics:
+dt, elapsed = 0.0011074, 0.159017
+dxEstm, dxElim = 0.00199974, 0.00135609
+vel, acc = 1.55663, 1490.26
+elim, brute = 0.743557, 0.0180018
+stay, superforce = 0.00479878, 0.0501206
+Tick 72 finished in 45.6567 seconds.
+
+Group finished
+Exporting point set... done
+Tick 73 statistics:
+dt, elapsed = 0.00110785, 0.160125
+dxEstm, dxElim = 0.00199715, 0.00135468
+vel, acc = 1.55338, 1485.43
+elim, brute = 0.745563, 0.0182049
+stay, superforce = 0.00479878, 0.0502729
+Tick 73 finished in 43.7108 seconds.
+
+Group finished
+Exporting point set... done
+Tick 74 statistics:
+dt, elapsed = 0.00110943, 0.161234
+dxEstm, dxElim = 0.00199607, 0.00135033
+vel, acc = 1.5477, 1492.66
+elim, brute = 0.746553, 0.0179256
+stay, superforce = 0.00484956, 0.0499937
+Tick 74 finished in 47.5216 seconds.
+
+Group finished
+Exporting point set... done
+Tick 75 statistics:
+dt, elapsed = 0.00111162, 0.162346
+dxEstm, dxElim = 0.0019976, 0.00134938
+vel, acc = 1.54381, 1481.2
+elim, brute = 0.747366, 0.0173924
+stay, superforce = 0.00490034, 0.0502729
+Tick 75 finished in 43.344 seconds.
+
+Group finished
+Exporting point set... done
+Tick 76 statistics:
+dt, elapsed = 0.00111296, 0.163459
+dxEstm, dxElim = 0.00200303, 0.00135106
+vel, acc = 1.55138, 1472.59
+elim, brute = 0.748915, 0.0176717
+stay, superforce = 0.00495112, 0.0516694
+Tick 76 finished in 43.384 seconds.
+
+Group finished
+Exporting point set... done
+Tick 77 statistics:
+dt, elapsed = 0.00111127, 0.16457
+dxEstm, dxElim = 0.00199762, 0.00135054
+vel, acc = 1.54984, 1474.93
+elim, brute = 0.747975, 0.0189412
+stay, superforce = 0.0052812, 0.0511616
+Tick 77 finished in 46.1084 seconds.
+
+Group finished
+Exporting point set... done
+Tick 78 statistics:
+dt, elapsed = 0.0011126, 0.165683
+dxEstm, dxElim = 0.00200317, 0.0013575
+vel, acc = 1.55922, 1491.41
+elim, brute = 0.747417, 0.0173162
+stay, superforce = 0.00525581, 0.0501714
+Tick 78 finished in 44.0946 seconds.
+
+Group finished
+Exporting point set... done
+Tick 79 statistics:
+dt, elapsed = 0.00111083, 0.166794
+dxEstm, dxElim = 0.00199904, 0.00134966
+vel, acc = 1.54161, 1491.14
+elim, brute = 0.748762, 0.0179002
+stay, superforce = 0.00517964, 0.0502222
+Tick 79 finished in 45.163 seconds.
+
+Group finished
+Exporting point set... done
+Tick 80 statistics:
+dt, elapsed = 0.00111137, 0.167905
+dxEstm, dxElim = 0.00199872, 0.00135639
+vel, acc = 1.56243, 1494.59
+elim, brute = 0.745995, 0.0176209
+stay, superforce = 0.00535737, 0.0499175
+Tick 80 finished in 45.15 seconds.
+
+Group finished
+Exporting point set... done
+Tick 81 statistics:
+dt, elapsed = 0.00111208, 0.169017
+dxEstm, dxElim = 0.00200696, 0.00136068
+vel, acc = 1.56137, 1498.95
+elim, brute = 0.746147, 0.0183319
+stay, superforce = 0.00530659, 0.050019
+Tick 81 finished in 43.0042 seconds.
+
+Group finished
+Exporting point set... done
+Tick 82 statistics:
+dt, elapsed = 0.00110823, 0.170125
+dxEstm, dxElim = 0.00200563, 0.00135924
+vel, acc = 1.55923, 1485.68
+elim, brute = 0.745741, 0.0179764
+stay, superforce = 0.00523042, 0.0512632
+Tick 82 finished in 44.3804 seconds.
+
+Group finished
+Exporting point set... done
+Tick 83 statistics:
+dt, elapsed = 0.00110512, 0.171231
+dxEstm, dxElim = 0.00199378, 0.0013536
+vel, acc = 1.55958, 1491.54
+elim, brute = 0.747366, 0.0180272
+stay, superforce = 0.00510347, 0.0501968
+Tick 83 finished in 44.5293 seconds.
+
+Group finished
+Exporting point set... done
+Tick 84 statistics:
+dt, elapsed = 0.00110856, 0.172339
+dxEstm, dxElim = 0.00200619, 0.00136019
+vel, acc = 1.56439, 1491.95
+elim, brute = 0.746909, 0.0174432
+stay, superforce = 0.004748, 0.0509839
+Tick 84 finished in 46.3503 seconds.
+
+Group finished
+Exporting point set... done
+Tick 85 statistics:
+dt, elapsed = 0.00110514, 0.173444
+dxEstm, dxElim = 0.00199672, 0.001359
+vel, acc = 1.56555, 1500.89
+elim, brute = 0.746045, 0.0175955
+stay, superforce = 0.00479878, 0.0495874
+Tick 85 finished in 44.2745 seconds.
+
+Group finished
+Exporting point set... done
+Tick 86 statistics:
+dt, elapsed = 0.00110695, 0.174551
+dxEstm, dxElim = 0.00200164, 0.0013548
+vel, acc = 1.55314, 1476.83
+elim, brute = 0.746325, 0.0181287
+stay, superforce = 0.00502729, 0.0514917
+Tick 86 finished in 43.7718 seconds.
+
+Group finished
+Exporting point set... done
+Tick 87 statistics:
+dt, elapsed = 0.00110605, 0.175657
+dxEstm, dxElim = 0.0019957, 0.00135069
+vel, acc = 1.55542, 1489.94
+elim, brute = 0.745182, 0.0181795
+stay, superforce = 0.00533198, 0.0505269
+Tick 87 finished in 46.3373 seconds.
+
+Group finished
+Exporting point set... done
+Tick 88 statistics:
+dt, elapsed = 0.00110843, 0.176766
+dxEstm, dxElim = 0.00200611, 0.00135856
+vel, acc = 1.56174, 1481.72
+elim, brute = 0.746629, 0.0184588
+stay, superforce = 0.00525581, 0.0512886
+Tick 88 finished in 42.9902 seconds.
+
+Group finished
+Exporting point set... done
+Tick 89 statistics:
+dt, elapsed = 0.00110506, 0.177871
+dxEstm, dxElim = 0.00199321, 0.00135365
+vel, acc = 1.55799, 1477.37
+elim, brute = 0.747645, 0.0175955
+stay, superforce = 0.00515425, 0.0514155
+Tick 89 finished in 46.0974 seconds.
+
+Group finished
+Exporting point set... done
+Tick 90 statistics:
+dt, elapsed = 0.00110882, 0.17898
+dxEstm, dxElim = 0.0019992, 0.00135696
+vel, acc = 1.55967, 1496.68
+elim, brute = 0.746731, 0.0183572
+stay, superforce = 0.00497651, 0.0499683
+Tick 90 finished in 44.5613 seconds.
+
+Group finished
+Exporting point set... done
+Tick 91 statistics:
+dt, elapsed = 0.00110927, 0.180089
+dxEstm, dxElim = 0.00200556, 0.00135997
+vel, acc = 1.56464, 1475.33
+elim, brute = 0.7447, 0.0186111
+stay, superforce = 0.00525581, 0.0514917
+Tick 91 finished in 44.7822 seconds.
+
+Group finished
+Exporting point set... done
+Tick 92 statistics:
+dt, elapsed = 0.00110619, 0.181195
+dxEstm, dxElim = 0.00199682, 0.00135169
+vel, acc = 1.55495, 1488.38
+elim, brute = 0.745004, 0.0183572
+stay, superforce = 0.00520503, 0.0511108
+Tick 92 finished in 43.5529 seconds.
+
+Group finished
+Exporting point set... done
+Tick 93 statistics:
+dt, elapsed = 0.00110795, 0.182303
+dxEstm, dxElim = 0.00200768, 0.0013624
+vel, acc = 1.576, 1470.88
+elim, brute = 0.74762, 0.0182303
+stay, superforce = 0.00507808, 0.0533198
+Tick 93 finished in 39.9769 seconds.
+
+Group finished
+Exporting point set... done
+Tick 94 statistics:
+dt, elapsed = 0.00110372, 0.183407
+dxEstm, dxElim = 0.00200314, 0.00136065
+vel, acc = 1.56985, 1484.85
+elim, brute = 0.744979, 0.0188651
+stay, superforce = 0.00520503, 0.0515932
+Tick 94 finished in 36.1971 seconds.
+
+Group finished
+Exporting point set... done
+Tick 95 statistics:
+dt, elapsed = 0.00110199, 0.184509
+dxEstm, dxElim = 0.00200666, 0.00136325
+vel, acc = 1.58087, 1495.48
+elim, brute = 0.746223, 0.0185858
+stay, superforce = 0.00525581, 0.0516948
+Tick 95 finished in 35.2836 seconds.
+
+Group finished
+Exporting point set... done
+Tick 96 statistics:
+dt, elapsed = 0.00109833, 0.185607
+dxEstm, dxElim = 0.00199204, 0.00135633
+vel, acc = 1.56627, 1478.65
+elim, brute = 0.744598, 0.0177987
+stay, superforce = 0.00512886, 0.051187
+Tick 96 finished in 35.1407 seconds.
+
+Group finished
+Exporting point set... done
+Tick 97 statistics:
+dt, elapsed = 0.00110272, 0.18671
+dxEstm, dxElim = 0.00200061, 0.00135486
+vel, acc = 1.5632, 1487.89
+elim, brute = 0.747213, 0.0184334
+stay, superforce = 0.0052812, 0.0518471
+Tick 97 finished in 37.0896 seconds.
+
+Group finished
+Exporting point set... done
+Tick 98 statistics:
+dt, elapsed = 0.00110238, 0.187812
+dxEstm, dxElim = 0.00198591, 0.00134504
+vel, acc = 1.54724, 1468.26
+elim, brute = 0.747239, 0.0187635
+stay, superforce = 0.00517964, 0.0509585
+Tick 98 finished in 35.3826 seconds.
+
+Group finished
+Exporting point set... done
+Tick 99 statistics:
+dt, elapsed = 0.0011102, 0.188922
+dxEstm, dxElim = 0.00200064, 0.00135024
+vel, acc = 1.55275, 1483.24
+elim, brute = 0.748965, 0.0187381
+stay, superforce = 0.00540815, 0.0511362
+Tick 99 finished in 35.2137 seconds.
+
+Group finished
+Exporting point set... done
+Tick 100 statistics:
+dt, elapsed = 0.00110985, 0.190032
+dxEstm, dxElim = 0.00200401, 0.00136007
+vel, acc = 1.56404, 1503.48
+elim, brute = 0.748178, 0.0188904
+stay, superforce = 0.00556049, 0.0501206
+Tick 100 finished in 31.3068 seconds.
+
+Group finished
+Exporting point set... done
+Tick 101 statistics:
+dt, elapsed = 0.00110763, 0.19114
+dxEstm, dxElim = 0.00201465, 0.00136942
+vel, acc = 1.57958, 1482.33
+elim, brute = 0.746477, 0.0186365
+stay, superforce = 0.00573823, 0.0522534
+Tick 101 finished in 31.24 seconds.
+
+Group finished
+Exporting point set... done
+Tick 102 statistics:
+dt, elapsed = 0.00109958, 0.192239
+dxEstm, dxElim = 0.00199947, 0.00135797
+vel, acc = 1.56908, 1478.3
+elim, brute = 0.745969, 0.0188904
+stay, superforce = 0.00545893, 0.0521518
+Tick 102 finished in 31.3279 seconds.
+
+Group finished
+Exporting point set... done
+Tick 103 statistics:
+dt, elapsed = 0.00109987, 0.193339
+dxEstm, dxElim = 0.00198485, 0.00134562
+vel, acc = 1.55419, 1475.01
+elim, brute = 0.751276, 0.0179256
+stay, superforce = 0.00556049, 0.0514663
+Tick 103 finished in 31.1311 seconds.
+
+Group finished
+Exporting point set... done
+Tick 104 statistics:
+dt, elapsed = 0.00110827, 0.194448
+dxEstm, dxElim = 0.00200242, 0.00135382
+vel, acc = 1.55572, 1490.06
+elim, brute = 0.749549, 0.0182049
+stay, superforce = 0.00533198, 0.0503745
+Tick 104 finished in 31.3239 seconds.
+
+Group finished
+Exporting point set... done
+Tick 105 statistics:
+dt, elapsed = 0.00110693, 0.195554
+dxEstm, dxElim = 0.00200026, 0.00135707
+vel, acc = 1.56992, 1489.57
+elim, brute = 0.749727, 0.0176717
+stay, superforce = 0.0055351, 0.0508569
+Tick 105 finished in 31.3139 seconds.
+
+Group finished
+Exporting point set... done
+Tick 106 statistics:
+dt, elapsed = 0.00110678, 0.196661
+dxEstm, dxElim = 0.00200012, 0.00135817
+vel, acc = 1.56614, 1479.86
+elim, brute = 0.747975, 0.0181541
+stay, superforce = 0.00548432, 0.0507554
+Tick 106 finished in 34.4839 seconds.
+
+Group finished
+Exporting point set... done
+Tick 107 statistics:
+dt, elapsed = 0.00110671, 0.197768
+dxEstm, dxElim = 0.00199781, 0.00135862
+vel, acc = 1.56051, 1482.53
+elim, brute = 0.747924, 0.0182049
+stay, superforce = 0.00576362, 0.05073
+Tick 107 finished in 33.2338 seconds.
+
+Group finished
+Exporting point set... done
+Tick 108 statistics:
+dt, elapsed = 0.00110793, 0.198876
+dxEstm, dxElim = 0.00198956, 0.0013504
+vel, acc = 1.54446, 1474.44
+elim, brute = 0.749194, 0.0182303
+stay, superforce = 0.00561127, 0.0503999
+Tick 108 finished in 31.7708 seconds.
+
+Group finished
+Exporting point set... done
+Tick 109 statistics:
+dt, elapsed = 0.00111374, 0.19999
+dxEstm, dxElim = 0.00200517, 0.00135728
+vel, acc = 1.55806, 1478.08
+elim, brute = 0.75186, 0.017951
+stay, superforce = 0.00556049, 0.051187
+Tick 109 finished in 31.4711 seconds.
+
+Group finished
+Exporting point set... done
+Tick 110 statistics:
+dt, elapsed = 0.00111087, 0.201101
+dxEstm, dxElim = 0.00200033, 0.00135885
+vel, acc = 1.55797, 1481.15
+elim, brute = 0.751276, 0.0182811
+stay, superforce = 0.0052812, 0.0506538
+Tick 110 finished in 31.5701 seconds.
+
+Group finished
+Exporting point set... done
+Tick 111 statistics:
+dt, elapsed = 0.00111069, 0.202211
+dxEstm, dxElim = 0.00200051, 0.00135537
+vel, acc = 1.55015, 1486.1
+elim, brute = 0.750311, 0.0183826
+stay, superforce = 0.00507808, 0.0500952
+Tick 111 finished in 31.0811 seconds.
+
+Group finished
+Exporting point set... done
+Tick 112 statistics:
+dt, elapsed = 0.0011104, 0.203322
+dxEstm, dxElim = 0.00198893, 0.00134665
+vel, acc = 1.53914, 1481.04
+elim, brute = 0.749981, 0.0183826
+stay, superforce = 0.00502729, 0.049689
+Tick 112 finished in 31.1706 seconds.
+
+Group finished
+Exporting point set... done
+Tick 113 statistics:
+dt, elapsed = 0.00111658, 0.204438
+dxEstm, dxElim = 0.00200352, 0.00135157
+vel, acc = 1.54307, 1472.52
+elim, brute = 0.753079, 0.018408
+stay, superforce = 0.00540815, 0.0510093
+Tick 113 finished in 32.2216 seconds.
+
+Group finished
+Exporting point set... done
+Tick 114 statistics:
+dt, elapsed = 0.00111462, 0.205553
+dxEstm, dxElim = 0.00200048, 0.00135332
+vel, acc = 1.55338, 1489.82
+elim, brute = 0.753561, 0.0178494
+stay, superforce = 0.00543354, 0.0506538
+Tick 114 finished in 31.456 seconds.
+
+Group finished
+Exporting point set... done
+Tick 115 statistics:
+dt, elapsed = 0.00111435, 0.206667
+dxEstm, dxElim = 0.00200762, 0.00136129
+vel, acc = 1.55569, 1498.04
+elim, brute = 0.748077, 0.017494
+stay, superforce = 0.0050019, 0.0492573
+Tick 115 finished in 31.7667 seconds.
+
+Group finished
+Exporting point set... done
+Tick 116 statistics:
+dt, elapsed = 0.00111013, 0.207777
+dxEstm, dxElim = 0.00199678, 0.00135161
+vel, acc = 1.54464, 1480.8
+elim, brute = 0.749702, 0.0184588
+stay, superforce = 0.00492573, 0.0498159
+Tick 116 finished in 31.2728 seconds.
+
+Group finished
+Exporting point set... done
+Tick 117 statistics:
+dt, elapsed = 0.00111191, 0.208889
+dxEstm, dxElim = 0.0019963, 0.00134311
+vel, acc = 1.53462, 1490.72
+elim, brute = 0.751377, 0.0186365
+stay, superforce = 0.00538276, 0.0498413
+Tick 117 finished in 31.7237 seconds.
+
+Group finished
+Exporting point set... done
+Tick 118 statistics:
+dt, elapsed = 0.00111397, 0.210003
+dxEstm, dxElim = 0.00200201, 0.00134932
+vel, acc = 1.54743, 1478.11
+elim, brute = 0.751581, 0.0182557
+stay, superforce = 0.00545893, 0.051314
+Tick 118 finished in 32.0212 seconds.
+
+Group finished
+Exporting point set... done
+Tick 119 statistics:
+dt, elapsed = 0.00111286, 0.211116
+dxEstm, dxElim = 0.00200395, 0.00135474
+vel, acc = 1.55182, 1489.17
+elim, brute = 0.748483, 0.0178748
+stay, superforce = 0.00538276, 0.0505269
+Tick 119 finished in 31.467 seconds.
+
+Group finished
+Exporting point set... done
+Tick 120 statistics:
+dt, elapsed = 0.00111066, 0.212227
+dxEstm, dxElim = 0.00199541, 0.00134733
+vel, acc = 1.5458, 1496.6
+elim, brute = 0.751606, 0.0182049
+stay, superforce = 0.00563666, 0.0493843
+Tick 120 finished in 31.6717 seconds.
+
+Group finished
+Exporting point set... done
+Tick 121 statistics:
+dt, elapsed = 0.00111322, 0.21334
+dxEstm, dxElim = 0.00201429, 0.00136083
+vel, acc = 1.5637, 1491.89
+elim, brute = 0.753332, 0.0182049
+stay, superforce = 0.00543354, 0.0515932
+Tick 121 finished in 31.6175 seconds.
+
+Group finished
+Exporting point set... done
+Tick 122 statistics:
+dt, elapsed = 0.00110532, 0.214445
+dxEstm, dxElim = 0.00200214, 0.00135419
+vel, acc = 1.56714, 1477.66
+elim, brute = 0.748534, 0.0188904
+stay, superforce = 0.0055351, 0.052812
+Tick 122 finished in 31.7347 seconds.
+
+Group finished
+Exporting point set... done
+Tick 123 statistics:
+dt, elapsed = 0.00110414, 0.215549
+dxEstm, dxElim = 0.00200408, 0.00135721
+vel, acc = 1.56819, 1475.28
+elim, brute = 0.749651, 0.0181541
+stay, superforce = 0.00523042, 0.0523803
+Tick 123 finished in 31.9676 seconds.
+
+Group finished
+Exporting point set... done
+Tick 124 statistics:
+dt, elapsed = 0.00110189, 0.216651
+dxEstm, dxElim = 0.00199752, 0.00135498
+vel, acc = 1.57196, 1488.98
+elim, brute = 0.750057, 0.017951
+stay, superforce = 0.00533198, 0.0522788
+Tick 124 finished in 31.6038 seconds.
+
+Group finished
+Exporting point set... done
+Tick 125 statistics:
+dt, elapsed = 0.00110326, 0.217754
+dxEstm, dxElim = 0.00200175, 0.00136267
+vel, acc = 1.57591, 1494.51
+elim, brute = 0.750006, 0.0187381
+stay, superforce = 0.00512886, 0.0509077
+Tick 125 finished in 31.3739 seconds.
+
+Group finished
+Exporting point set... done
+Tick 126 statistics:
+dt, elapsed = 0.00110229, 0.218857
+dxEstm, dxElim = 0.00200324, 0.00136885
+vel, acc = 1.58483, 1483.58
+elim, brute = 0.746782, 0.0177225
+stay, superforce = 0.00520503, 0.0519487
+Tick 126 finished in 31.3889 seconds.
+
+Group finished
+Exporting point set... done
+Tick 127 statistics:
+dt, elapsed = 0.00110051, 0.219957
+dxEstm, dxElim = 0.00200681, 0.00136994
+vel, acc = 1.58838, 1477.72
+elim, brute = 0.748737, 0.0177225
+stay, superforce = 0.00540815, 0.052812
+Tick 127 finished in 31.5101 seconds.
+
+Group finished
+Exporting point set... done
+Tick 128 statistics:
+dt, elapsed = 0.00109678, 0.221054
+dxEstm, dxElim = 0.00198327, 0.00135469
+vel, acc = 1.56541, 1489.05
+elim, brute = 0.748483, 0.0188651
+stay, superforce = 0.00538276, 0.0499937
+Tick 128 finished in 32.1195 seconds.
+
+Group finished
+Exporting point set... done
+Tick 129 statistics:
+dt, elapsed = 0.00110603, 0.22216
+dxEstm, dxElim = 0.0020048, 0.0013614
+vel, acc = 1.56487, 1485.85
+elim, brute = 0.752545, 0.018992
+stay, superforce = 0.00545893, 0.0513393
+Tick 129 finished in 32.2344 seconds.
+
+Group finished

@@ -26,26 +26,30 @@ public:
         return field;
     }
 
-    void clear()
+    ElectricField & clear()
     {
         uniformField = Vector3D::ZERO_VECTOR;
         customOverlays.clear();
+        return *this;
     }
 
-    void overlayUniformField(const Vector3D & newUniformField)
+    ElectricField & overlayUniformField(const Vector3D & newUniformField)
     {
         uniformField += newUniformField;
+        return *this;
     }
 
-    void overlayPointChargeField(const Vector3D & coordQ, const long double & q)
+    ElectricField & overlayPointChargeField(const Vector3D & coordQ, const long double & q)
     {
         customOverlays.push_back([coordQ, q](const Vector3D & coordTgt) -> Vector3D
             { return calcPointChargeField(coordQ, q, coordTgt); });
+        return *this;
     }
 
-    void ovarlayCustomField(std::function<Vector3D(Vector3D)> fieldFunc)
+    ElectricField & ovarlayCustomField(std::function<Vector3D(Vector3D)> fieldFunc)
     {
         customOverlays.push_back(fieldFunc);
+        return *this;
     }
 
     Vector3D get(const Vector3D & coordTgt) const
