@@ -156,7 +156,7 @@ Region testcase13
 
 int main()
 {
-    Region & region = testcase4; // Select testcase here
+    Region & region = testcase3; // Select testcase here
     cout << region.summary << '\n';
     Timer timer;
     region.initialise();
@@ -165,7 +165,9 @@ int main()
     while (region.getTick() <= 128) // Emulation will keep running until manually stopped
     {
         cout << "Exporting point set... ";
-        exportPointSet("points.txt", chargesToPointSet(region.allCharges()));
+        stringstream filename;
+        filename << "points" << region.getTick() << ".txt";
+        exportPointSet(filename.str(), chargesToPointSet(region.allCharges()));
             // points.txt is adapted for Mathematica plotting
             // Run the following Wolfram languange code in Mathematica (or anything Wolfram) to draw a plot: 
             // pointfile = FileNameJoin[{NotebookDirectory[], "points.txt"}];
@@ -176,7 +178,7 @@ int main()
             // However, it will be way slower, which is not surprising at all when using anything Python
         cout << "done\n\n";
 
-        bool doStat = true;
+        bool doStat = false;
         if (doStat)
         {
             cout << "Distribution statistics: \n";
