@@ -41,11 +41,15 @@ public:
     Region() = delete;
     Region(const int & _radius, std::initializer_list<Conductor> _conductors, 
         const ElectricField & _outerField, const long double & _dt, 
-        const std::string & _summary = "", const long double & _dynamicConvergenceTime = 0.0)
+        const std::string & _summary = "Untitled", const long double & _dynamicConvergenceTime = 0.0, 
+        const std::list<Vector3D> & _importedPointSet = std::list<Vector3D>())
         :radius(_radius), conductors(_conductors), outerField(_outerField), dt(_dt),
-        tick(0), summary(_summary), dynamicConvergenceTime(_dynamicConvergenceTime) {}
+        tick(0), summary(_summary), dynamicConvergenceTime(_dynamicConvergenceTime)
+        {
+            if (!_importedPointSet.empty()) initialise(_importedPointSet);
+        }
 
-    void initialise()
+    void initialise(const std::list<Vector3D> & importedPointSet = std::list<Vector3D>())
     {
         initialised = true;
 
@@ -55,7 +59,12 @@ public:
         for (Conductor & conductor : conductors)
         {
             conductor.precalcApproxClosestSurfacePoint(radius);
-            conductor.spreadCharges(true);
+            if (importedPointSet.empty()) conductor.spreadCharges(true);
+            else
+            {
+                for (const Vector3D & point : importedPointSet)
+                    if (conductor(point)) conductor.boundCharges.emplace_back(true, point);
+            }
 
             for (const FreeCharge & charge : conductor.boundCharges)
                 chunks.at(Chunk::ChunkId(charge.coord)).assignCharge(&charge);
@@ -228,9 +237,20 @@ public:
     {
         std::vector<std::vector<std::vector<std::vector<std::optional<long double>>>>> fields(conductors.size());
         for (int conductorId = 0; conductorId < conductors.size(); conductorId++)
-            fields[conductorId] = conductors[conductorId].paramSurfaceField(precision, distance);
+            fields[conductorId] = conductors[conductorId].paramSurfaceField(precision, distance, outerField);
 
         return fields;
+    }
+
+    std::vector<std::vector<std::vector<std::vector<std::optional<long double>>>>>
+        paramSurfaceDensity(int precision, long double distance = 0.2 * Chunk::CHUNK_LENGTH)
+        // paramSurfaceDensity[conductorId][surfaceId][uInt][vInt] = count
+    {
+        std::vector<std::vector<std::vector<std::vector<std::optional<long double>>>>> density(conductors.size());
+        for (int conductorId = 0; conductorId < conductors.size(); conductorId++)
+            density[conductorId] = conductors[conductorId].paramSurfaceDensity(precision, distance);
+
+        return density;
     }
 
     std::list<FreeCharge> allCharges()

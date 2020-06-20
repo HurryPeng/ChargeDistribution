@@ -91,4 +91,34 @@ std::vector<long double> paramStatU(std::vector<std::vector<std::optional<long d
     return stat;
 }
 
+std::list<HurryPeng::Vector3D> importPointSet(std::string filename)
+// Mathematica formed points.txt supported
+{
+    std::ifstream ifs(filename);
+    auto clean = [&ifs]() -> bool
+    {
+        for (char peek = ifs.peek(); peek == ' ' || peek == '{' || peek == '}' || peek == ',' || peek == '\n'; peek = ifs.peek())
+        {
+            ifs.get();
+            if (ifs.peek() == std::char_traits<char>::eof()) return false;
+        }
+        return true;
+    };
+
+    std::list<HurryPeng::Vector3D> pointSet;
+    while (clean())
+    {
+        HurryPeng::Vector3D point;
+        ifs >> point.x;
+        clean();
+        ifs >> point.y;
+        clean();
+        ifs >> point.z;
+        pointSet.push_back(point);
+        //std::cout << pointSet.size() << ':' << point << '\n';
+    }
+
+    return pointSet;
+}
+
 #endif

@@ -14,7 +14,8 @@
 #include <algorithm>
 #include <optional>
 
-//#define SPHERE_STAT
+#define PERPENDICULAR_VERIFY
+#define GAUSS_CURVATURE_CORRECTION
 
 namespace HurryPeng
 {
@@ -75,20 +76,25 @@ struct Conductor
             return points;
         }
 
-        Vector3D normalVectorAt(const double & u, const double & v, int precision) const
+        Vector3D rawNormalVectorAt(const double & u, const double & v, int precision) const
         {
             double u1 = u + 1.0 / precision;
             double v1 = v + 1.0 / precision;
 
-            Vector3D vecU = paramSurface(u1, v) - paramSurface(u, v);
-            Vector3D vecV = paramSurface(u, v1) - paramSurface(u, v);
+            Vector3D du = paramSurface(u1, v) - paramSurface(u, v);
+            Vector3D dv = paramSurface(u, v1) - paramSurface(u, v);
 
-            Vector3D vecPerpendicular = vecU.outerProduct(vecV);
+            Vector3D vecPerpendicular = du.outerProduct(dv);
             if (!facingOut) vecPerpendicular = -vecPerpendicular;
 
             // Returns zero vector if normal vector cannot be calculated
             if (vecPerpendicular == Vector3D::ZERO_VECTOR) return Vector3D::ZERO_VECTOR;
-            return vecPerpendicular.unit();
+            return vecPerpendicular;
+        }
+
+        Vector3D normalVectorAt(const double & u, const double & v, int precision) const
+        {
+            return rawNormalVectorAt(u, v, precision).unit();
         }
 
         std::map<Vector3D, Vector3D> normalVectors(int precision) const
@@ -98,6 +104,37 @@ struct Conductor
                 normVectors[paramSurface(u, v)]
                     = normalVectorAt(u, v, precision);
             return normVectors;
+        }
+
+        long double gaussianCurvatureAt(const double & u, const double & v, int precision) const
+        {
+            precision *= 16; // Very high precision is required because of the use of second-order derivatives
+            double u1 = u + 0.5 / precision, u2 = u + 1.0 / precision;
+            double v1 = v + 0.5 / precision, v2 = v + 1.0 / precision;
+
+            Vector3D 
+                du = paramSurface(u1, v) - paramSurface(u, v),
+                du1 = paramSurface(u2, v) - paramSurface(u1, v),
+                ddu = du1 - du,
+                dv = paramSurface(u, v1) - paramSurface(u, v),
+                dv1 = paramSurface(u, v2) - paramSurface(u, v1),
+                ddv = dv1 - dv,
+                du10 = paramSurface(u1, v1) - paramSurface(u, v1),
+                du11 = paramSurface(u2, v1) - paramSurface(u1, v1),
+                ddu1 = du11 - du10,
+                dduv = ddu1 - ddu;
+            Vector3D n = normalVectorAt(u, v, precision * 2);
+
+            long double
+                E = du % du, 
+                F = du % dv,
+                G = dv % dv,
+                L = ddu % n,
+                M = dduv % n,
+                N = ddv % n;
+
+            long double K = (L * N - M * M) / (E * G - F * F);
+            return K;
         }
 
         static Surface generatePlate(const Vector3D & origin,
@@ -258,10 +295,6 @@ struct Conductor
 
     std::list<std::pair<Vector3D, long double>> discreteSurfaceField(int precision, long double distance) const
     {
-        #ifdef SPHERE_STAT
-        std::vector<std::vector<long double>> sphereStat(precision);
-        #endif
-
         std::list<std::pair<Vector3D, long double>> fields;
         for (const Surface surface : surfaces)
         {
@@ -278,36 +311,28 @@ struct Conductor
                     intensity += freeCharge.q() * freeCharge.q() / deltaX.norm() / deltaX.norm() * deltaX.unit();
                 }
                 fields.emplace_back(extendedPoint, intensity.norm());
-
-                #ifdef SPHERE_STAT
-                sphereStat[int(round(precision * uv.second))].push_back(intensity.norm());
-                #endif
             }
-
-            #ifdef SPHERE_STAT
-            for (int i = 0; i < precision; i++)
-            {
-                std::vector<long double> & statV = sphereStat[i];
-                long double sum = std::accumulate(statV.begin(), statV.end(), 0.0);
-                sum /= statV.size();
-                std::cout << sum << ' ';
-            }
-            std::cout << '\n';
-            #endif
         }
         return fields;
     }
 
     std::vector<std::vector<std::vector<std::optional<long double>>>>
-        paramSurfaceField(int precision, long double distance)
+        paramSurfaceField(int precision, long double distance, ElectricField outerfield = ElectricField())
         // paramSurfaceField[surfaceId][uInt][vInt] = intensity
     {
+        const static long double K = 9E9;
+
         std::vector<std::vector<std::vector<std::optional<long double>>>> fields(surfaces.size());
         for (auto & row : fields)
         {
             row.resize(precision);
             for (auto & col : row) col.resize(precision);
         }
+
+        #ifdef PERPENDICULAR_VERIFY
+        int count = 0;
+        long double cosOfAngle = 0.0;
+        #endif
 
         for (int surfaceId = 0; surfaceId < surfaces.size(); surfaceId++)
         {
@@ -325,12 +350,63 @@ struct Conductor
                 for (const FreeCharge & freeCharge : boundCharges)
                 {
                     Vector3D deltaX = extendedPoint - freeCharge.coord;
-                    intensity += freeCharge.q() * freeCharge.q() / deltaX.norm() / deltaX.norm() * deltaX.unit();
+                    intensity += K * freeCharge.q() / deltaX.norm() / deltaX.norm() * deltaX.unit();
                 }
-                fields[surfaceId][uInt][vInt] = intensity.norm();
+
+                // Gaussian curvature correction
+                long double gaussR = sqrt(1 / surface.gaussianCurvatureAt(u, v, precalcPrecision));
+                long double coef = (1 + (distance / gaussR)) * (1 + (distance / gaussR));
+
+                fields[surfaceId][uInt][vInt] = intensity.norm() * coef;
+
+                #ifdef PERPENDICULAR_VERIFY
+                if (long double temp = (intensity + outerfield.get(extendedPoint)).cosineOfAngle(normalVect); !isnan(temp))
+                {
+                    count++;
+                    cosOfAngle += temp;
+                }
+                #endif
             }
         }
+        #ifdef PERPENDICULAR_VERIFY
+        std::cout << "Averge cosOfAngle = " << cosOfAngle / count << '\n';
+        #endif
         return fields;
+    }
+
+    std::vector<std::vector<std::vector<std::optional<long double>>>>
+        paramSurfaceDensity(int precision, long double distance = 0.2 * Chunk::CHUNK_LENGTH)
+        // paramSurfaceDensity[surfaceId][uInt][vInt] = count
+    {
+        std::vector<std::vector<std::vector<std::optional<long double>>>> density(surfaces.size());
+        for (auto & row : density)
+        {
+            row.resize(precision);
+            for (auto & col : row)
+            {
+                col.resize(precision);
+                for (auto & element : col) element = 0.0;
+            }
+        }
+
+        for (int surfaceId = 0; surfaceId < surfaces.size(); surfaceId++)
+        {
+            const Surface & surface = surfaces[surfaceId];
+            for (const FreeCharge & charge : boundCharges)
+            {
+                const auto & [u, v] = preciseClosestSurfacePoint(charge.coord, surfaceId);
+                Vector3D surfacePoint = surface(u, v);
+                if ((surfacePoint - charge.coord).norm() >= distance) continue;
+                int uInt = int(u * precision), vInt = int(v * precision);
+                density[surfaceId][uInt][vInt] = *density[surfaceId][uInt][vInt] + 1;
+            }
+            for (int uInt = 0; uInt < precision; uInt++) for (int vInt = 0; vInt < precision; vInt++)
+                density[surfaceId][uInt][vInt] = *density[surfaceId][uInt][vInt]
+                    / surface.rawNormalVectorAt(double(uInt) / precision, double(vInt) / precision, precision).norm();
+            // Divide with area of dudv
+        }
+
+        return density;
     }
 
     static Conductor generateEllipse

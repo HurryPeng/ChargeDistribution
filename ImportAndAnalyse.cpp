@@ -1,6 +1,3 @@
-// ChargeDistributionDemo.cpp
-// HurryPeng
-
 #include "Region.hpp"
 #include "DebugUtil.hpp"
 #include "Timer.hpp"
@@ -8,8 +5,7 @@
 using namespace std;
 using namespace HurryPeng;
 
-// Preset testcases
-
+/*
 Region testcase0
 (
     8,
@@ -177,50 +173,36 @@ Region testcase13
     0.001,
     "Two Sphere Conductors, Precision 168", 0.16
 );
+*/
+
+Region region
+(
+    8,
+    { Conductor::generateTwistedTimeglass(Vector3D{0, -0.03, 0}, 0.04, 0.04, 0.06, 128, 128) },
+    ElectricField()
+        .overlayPointChargeField(Vector3D{0.04, 0.06, 0.06}, 6E-9)
+        .overlayPointChargeField(Vector3D::ZERO_VECTOR, -4E-9),
+    0.001,
+    "Twisted Timeglass Conductor in Two Point Charge Fields, Precision 128", 
+    0.16, 
+    importPointSet("points.txt")
+);
 
 int main()
 {
-    Region & region = testcase11_1; // Select testcase here
-    cout << region.summary << '\n';
-    Timer timer;
-    region.initialise();
-    cout << "Precalculation finished in " << timer.read() << " seconds. \n\n";
-
-    while (region.getTick() <= 128) // Emulation will keep running until manually stopped
+    cout << "Distribution statistics: \n";
+    /*
+    for (double distance = 0.003; distance >= 0.0; distance -= 0.0005)
     {
-        cout << "Exporting point set... ";
-        exportPointSet("points.txt", chargesToPointSet(region.allCharges()));
-            // points.txt is adapted for Mathematica plotting
-            // Run the following Wolfram languange code in Mathematica (or anything Wolfram) to draw a plot: 
-            // pointfile = FileNameJoin[{NotebookDirectory[], "points.txt"}];
-            // ListPointPlot3D[ToExpression[Import[pointfile]], Axes -> True, BoxRatios -> Automatic]
-        // exportPointSetForPy("pointsPy.txt", chargesToPointSet(region.allCharges()));
-            // If you don't have Mathematica, Python with matplotlib can be a good alternative
-            // Run plot.py, and then it will search for pointsPy.txt and plot it
-            // However, it will be way slower, which is not surprising at all when using anything Python
-        cout << "done\n\n";
-
-        bool doStat = false;
-        if (doStat)
-        {
-            cout << "Distribution statistics: \n";
-            for (const long double & intensity : paramStatU(region.paramSurfaceField(64, 0.001)[0][0]))
-                cout << intensity << ' ';
-            cout << "\n\n";
-        }
-
-        int group = 1; // Export points and do statistics every `group` ticks
-        for (int i = 0; i < group; i++)
-        {
-            timer.restart();
-            cout << region.proceed();
-            cout << "Tick " << region.getTick() << " finished in " << timer.read() << " seconds. \n\n";
-        }
-        cout << "Group finished\n";
+        for (const long double & intensity : paramStatU(region.paramSurfaceField(64, distance)[0][0]))
+            cout << intensity << ' ';
+        cout << "\n\n";
     }
+    */
 
-    cin.get();
-    cin.get();
+    for (const long double & countAv : paramStatU(region.paramSurfaceField(64, 0.001)[0][0]))
+        cout << countAv << ' ';
+    cout << "\n\n";
 
     return 0;
 }
