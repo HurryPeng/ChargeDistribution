@@ -175,12 +175,13 @@ Region testcase13
     },
     ElectricField(),
     0.001,
-    "Two Sphere Conductors, Precision 168", 0.16
+    "Two Sphere Conductors, Precision 168",
+    0.16
 );
 
 int main()
 {
-    Region & region = testcase11_1; // Select testcase here
+    Region & region = testcase13; // Select testcase here
     cout << region.summary << '\n';
     Timer timer;
     region.initialise();
@@ -200,11 +201,11 @@ int main()
             // However, it will be way slower, which is not surprising at all when using anything Python
         cout << "done\n\n";
 
-        bool doStat = false;
+        bool doStat = true;
         if (doStat)
         {
             cout << "Distribution statistics: \n";
-            for (const long double & intensity : paramStatU(region.paramSurfaceField(64, 0.001)[0][0]))
+            for (const long double & intensity : paramStatU(region.paramSurfaceField(64, 0.003)[0][0]))
                 cout << intensity << ' ';
             cout << "\n\n";
         }

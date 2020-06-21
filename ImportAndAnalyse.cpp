@@ -1,3 +1,5 @@
+#define PERPENDICULAR_VERIFY
+
 #include "Region.hpp"
 #include "DebugUtil.hpp"
 #include "Timer.hpp"
@@ -178,12 +180,10 @@ Region testcase13
 Region region
 (
     8,
-    { Conductor::generateTwistedTimeglass(Vector3D{0, -0.03, 0}, 0.04, 0.04, 0.06, 128, 128) },
-    ElectricField()
-        .overlayPointChargeField(Vector3D{0.04, 0.06, 0.06}, 6E-9)
-        .overlayPointChargeField(Vector3D::ZERO_VECTOR, -4E-9),
+    { Conductor::generateEllipse(Vector3D::ZERO_VECTOR, 0.03, 0.03, 0.06, 128, 192) },
+    ElectricField(),
     0.001,
-    "Twisted Timeglass Conductor in Two Point Charge Fields, Precision 128", 
+    "Ellipse Conductor, Precision 192", 
     0.16, 
     importPointSet("points.txt")
 );
@@ -191,16 +191,8 @@ Region region
 int main()
 {
     cout << "Distribution statistics: \n";
-    /*
-    for (double distance = 0.003; distance >= 0.0; distance -= 0.0005)
-    {
-        for (const long double & intensity : paramStatU(region.paramSurfaceField(64, distance)[0][0]))
-            cout << intensity << ' ';
-        cout << "\n\n";
-    }
-    */
 
-    for (const long double & countAv : paramStatU(region.paramSurfaceField(64, 0.001)[0][0]))
+    for (const long double & countAv : paramStatU(region.paramSurfaceField(64, 0.003)[0][0]))
         cout << countAv << ' ';
     cout << "\n\n";
 

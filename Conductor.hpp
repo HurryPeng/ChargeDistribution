@@ -14,9 +14,6 @@
 #include <algorithm>
 #include <optional>
 
-#define PERPENDICULAR_VERIFY
-#define GAUSS_CURVATURE_CORRECTION
-
 namespace HurryPeng
 {
 
@@ -317,7 +314,7 @@ struct Conductor
     }
 
     std::vector<std::vector<std::vector<std::optional<long double>>>>
-        paramSurfaceField(int precision, long double distance, ElectricField outerfield = ElectricField())
+        paramSurfaceField(int precision, long double distance, ElectricField outerfieldPlus = ElectricField())
         // paramSurfaceField[surfaceId][uInt][vInt] = intensity
     {
         const static long double K = 9E9;
@@ -353,6 +350,8 @@ struct Conductor
                     intensity += K * freeCharge.q() / deltaX.norm() / deltaX.norm() * deltaX.unit();
                 }
 
+                intensity += outerfieldPlus.get(extendedPoint);
+
                 // Gaussian curvature correction
                 long double gaussR = sqrt(1 / surface.gaussianCurvatureAt(u, v, precalcPrecision));
                 long double coef = (1 + (distance / gaussR)) * (1 + (distance / gaussR));
@@ -360,7 +359,7 @@ struct Conductor
                 fields[surfaceId][uInt][vInt] = intensity.norm() * coef;
 
                 #ifdef PERPENDICULAR_VERIFY
-                if (long double temp = (intensity + outerfield.get(extendedPoint)).cosineOfAngle(normalVect); !isnan(temp))
+                if (long double temp = intensity.cosineOfAngle(normalVect); !isnan(temp))
                 {
                     count++;
                     cosOfAngle += temp;

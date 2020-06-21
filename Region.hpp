@@ -237,8 +237,17 @@ public:
     {
         std::vector<std::vector<std::vector<std::vector<std::optional<long double>>>>> fields(conductors.size());
         for (int conductorId = 0; conductorId < conductors.size(); conductorId++)
-            fields[conductorId] = conductors[conductorId].paramSurfaceField(precision, distance, outerField);
-
+        {
+            ElectricField outerFieldPlus = outerField;
+            for (int otherId = 0; otherId < conductors.size(); otherId++)
+            {
+                if (otherId == conductorId) continue;
+                const Conductor & other = conductors[otherId];
+                for (const auto & charge : other.boundCharges)
+                    outerFieldPlus.overlayPointChargeField(charge.coord, charge.q());
+            }
+            fields[conductorId] = conductors[conductorId].paramSurfaceField(precision, distance, outerFieldPlus);
+        }
         return fields;
     }
 
