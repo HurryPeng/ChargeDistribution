@@ -120,7 +120,7 @@ struct Conductor
                 du11 = paramSurface(u2, v1) - paramSurface(u1, v1),
                 ddu1 = du11 - du10,
                 dduv = ddu1 - ddu;
-            Vector3D n = normalVectorAt(u, v, precision * 2);
+            Vector3D n = normalVectorAt(u, v, precision * 2); // Facing is included here
 
             long double
                 E = du % du, 
@@ -353,8 +353,13 @@ struct Conductor
                 intensity += outerfieldPlus.get(extendedPoint);
 
                 // Gaussian curvature correction
-                long double gaussR = sqrt(1 / surface.gaussianCurvatureAt(u, v, precalcPrecision));
+                long double k = surface.gaussianCurvatureAt(u, v, precalcPrecision);
+                long double gaussR = 0.0;
+                if (k > 0.0) gaussR = sqrt(1 / k);
+                else if (k < 0.0) gaussR = -sqrt(-1 / k);
+                else gaussR = LDBL_MAX;
                 long double coef = (1 + (distance / gaussR)) * (1 + (distance / gaussR));
+                if (isnan(coef)) coef = 1.0;
 
                 fields[surfaceId][uInt][vInt] = intensity.norm() * coef;
 
