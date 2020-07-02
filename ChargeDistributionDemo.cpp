@@ -166,6 +166,16 @@ Region testcase12
     0.16
 );
 
+Region testcase12_1
+(
+    8,
+    { Conductor::generateCthulhu(Vector3D{0, 0, 0.02}, 0.02, 192, 512) },
+    ElectricField(),
+    0.001,
+    "Cthulhu Conductor, Precision 512", 
+    0.16
+);
+
 Region testcase13
 (
     8,
@@ -181,7 +191,7 @@ Region testcase13
 
 int main()
 {
-    Region & region = testcase13; // Select testcase here
+    Region & region = testcase12_1; // Select testcase here
     cout << region.summary << '\n';
     Timer timer;
     region.initialise();
@@ -201,7 +211,7 @@ int main()
             // However, it will be way slower, which is not surprising at all when using anything Python
         cout << "done\n\n";
 
-        bool doStat = true;
+        bool doStat = false;
         if (doStat)
         {
             cout << "Distribution statistics: \n";

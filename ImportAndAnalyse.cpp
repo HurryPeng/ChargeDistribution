@@ -164,6 +164,16 @@ Region testcase12
     0.16
 );
 
+Region testcase12_1
+(
+    8,
+    { Conductor::generateCthulhu(Vector3D{0, 0, 0.02}, 0.02, 192, 512) },
+    ElectricField(),
+    0.001,
+    "Cthulhu Conductor, Precision 512", 
+    0.16
+);
+
 Region testcase13
 (
     8,
@@ -180,10 +190,10 @@ Region testcase13
 Region region
 (
     8,
-    { Conductor::generateEllipse(Vector3D::ZERO_VECTOR, 0.03, 0.03, 0.06, 128, 192) },
+    { Conductor::generateCthulhu(Vector3D{0, 0, 0.02}, 0.02, 192, 512) },
     ElectricField(),
     0.001,
-    "Ellipse Conductor, Precision 192", 
+    "Cthulhu Conductor, Precision 512", 
     0.16, 
     importPointSet("points.txt")
 );
