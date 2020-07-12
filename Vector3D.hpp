@@ -13,9 +13,8 @@ namespace HurryPeng
 
 const long double PI = 3.1415926535897932384626433832795;
 
-class Vector3D
+struct Vector3D
 {
-public:
     Vector3D() : x(0.0), y(0.0), z(0.0) {}
     Vector3D(const long double & _x, const long double & _y, const long double & _z)
         :x(_x), y(_y), z(_z) {}
@@ -24,19 +23,10 @@ public:
         if (il.size() != 3) throw std::invalid_argument("Initializing a Vector3D with not exactly 3 arguments");
         x = il.begin()[0], y = il.begin()[1], z = il.begin()[2];
     }
-    Vector3D(const Vector3D & rhs) { *this = rhs; }
 
     long double x;
     long double y;
     long double z;
-
-    Vector3D & operator=(const Vector3D & rhs)
-    {
-        x = rhs.x;
-        y = rhs.y;
-        z = rhs.z;
-        return *this;
-    }
 
     bool operator==(const Vector3D & rhs) const
     {

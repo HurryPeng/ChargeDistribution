@@ -48,6 +48,26 @@ public:
         {
             if (!_importedPointSet.empty()) initialise(_importedPointSet);
         }
+    Region(const Region & other)
+        : initialised(other.initialised), radius(other.radius), 
+        chunks(other.chunks), conductors(other.conductors), dt(other.dt), 
+        elapsed(other.elapsed), tick(other.tick), 
+        dynamicConvergenceTime(other.dynamicConvergenceTime), 
+        outerField(other.outerField), summary(other.summary)
+    {
+        for (auto & [id, chunk] : chunks) chunk.clear();
+        for (const Conductor & conductor : conductors)
+        {
+            for (const FreeCharge & freeCharge : conductor.boundCharges)
+                chunks.at(Chunk::ChunkId(freeCharge.coord)).assignCharge(&freeCharge);
+        }
+    }
+    Region(Region && other) = default;
+    Region & operator = (const Region & other)
+    {
+        return *this = Region(other);
+    }
+    Region & operator = (Region && other) = default;
 
     void initialise(const std::list<Vector3D> & importedPointSet = std::list<Vector3D>())
     {

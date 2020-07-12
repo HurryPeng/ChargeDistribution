@@ -116,6 +116,10 @@ public:
     Chunk() = delete;
     Chunk(const ChunkId & chunkId)
         :id(chunkId), fieldUpdated(true) {}
+    Chunk(const Chunk & other) = default;
+    Chunk(Chunk && other) = default;
+    Chunk & operator = (const Chunk & other) = default;
+    Chunk & operator = (Chunk && other) = default;
 
     ChunkId getId() const { return id; }
     Vector3D centre() const { return id.centre(); }
@@ -137,6 +141,11 @@ public:
     {
         freeCharges.erase(charge);
         fieldUpdated = false;
+    }
+    void clear()
+    {
+        freeCharges.clear();
+        return;
     }
 
     void updateStat()
