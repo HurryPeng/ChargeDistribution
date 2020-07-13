@@ -191,7 +191,7 @@ Region testcase13
 
 int main()
 {
-    Region & region = testcase12_1; // Select testcase here
+    Region & region = testcase12; // Select testcase here
     cout << region.summary << '\n';
     Timer timer;
     region.initialise();

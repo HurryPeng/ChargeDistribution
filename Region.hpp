@@ -19,7 +19,7 @@ class Region
 private:
     bool initialised = false;
 
-    const int radius = 8;
+    int radius = 8;
     std::map<Chunk::ChunkId, Chunk> chunks;
     std::vector<Conductor> conductors;
 
@@ -49,23 +49,31 @@ public:
             if (!_importedPointSet.empty()) initialise(_importedPointSet);
         }
     Region(const Region & other)
-        : initialised(other.initialised), radius(other.radius), 
-        chunks(other.chunks), conductors(other.conductors), dt(other.dt), 
-        elapsed(other.elapsed), tick(other.tick), 
-        dynamicConvergenceTime(other.dynamicConvergenceTime), 
-        outerField(other.outerField), summary(other.summary)
     {
+        *this = other;
+    }
+    Region(Region && other) = default;
+    Region & operator = (const Region & other)
+    {
+        initialised = other.initialised;
+        radius = other.radius;
+        chunks = other.chunks;
+        conductors = other.conductors;
+        dt = other.dt;
+        elapsed = other.elapsed;
+        tick = other.tick;
+        dynamicConvergenceTime = other.dynamicConvergenceTime;
+        outerField = other.outerField;
+        summary = other.summary;
+
         for (auto & [id, chunk] : chunks) chunk.clear();
         for (const Conductor & conductor : conductors)
         {
             for (const FreeCharge & freeCharge : conductor.boundCharges)
                 chunks.at(Chunk::ChunkId(freeCharge.coord)).assignCharge(&freeCharge);
         }
-    }
-    Region(Region && other) = default;
-    Region & operator = (const Region & other)
-    {
-        return *this = Region(other);
+
+        return *this;
     }
     Region & operator = (Region && other) = default;
 
